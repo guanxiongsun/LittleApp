@@ -13,7 +13,7 @@ import mkl
 mkl.get_max_threads()
 
 caffe_path = '/home/vis/sunguanxiong/code/fg-caffe-mpi/caffe_train/'
-import sys, os
+
 sys.path.insert(0, os.path.join(caffe_path, 'python'))
 import caffe
 from caffe import layers as L  # pseudo module using __getattr__ magic to generate protobuf messages
@@ -149,7 +149,8 @@ def setLayers_twoBranches(data_source, batch_size, layername, kernel, stride, ou
             local_counter += 1
 
 
-        elif layername[l] == 'C7bn':
+        #Depth = l
+        elif layername[l] == 'C2_b_s_r':
             for level in range(0,2):
                 if state == 'image':
                     conv_name = 'conv%d_%d_CPM_L%d' % (pool_counter, local_counter, level+1) # no image state in subsequent stages
@@ -158,27 +159,34 @@ def setLayers_twoBranches(data_source, batch_size, layername, kernel, stride, ou
                     else:
                         lr_m = lr_mult_distro[1]
                 else:
-                    conv_name1 = 'Mconv%d_stage%d_1x7_L%d' % (conv_counter, stage, level+1)
                     lr_m = lr_mult_distro[2]
-                    conv_name2 = 'Mconv%d_stage%d_7x1_L%d' % (conv_counter, stage, level+1)
-                    bn_name1 = 'Mconv%d_stage%d_1x7_bn_L%d' % (conv_counter, stage, level+1)
-                    scale_name1 = 'Mconv%d_stage%d_7x1_L%d' % (conv_counter, stage, level+1)
+                    conv_name1 = 'Mconv%d_stage%d_1x%d_L%d' % (conv_counter, stage, kernel[l],level+1)
+                    conv_name2 = 'Mconv%d_stage%d_%dx1_L%d' % (conv_counter, stage, kernel[l],level+1)
+                    bn_name1 = 'Mconv%d_stage%d_1x%d_bn_L%d' % (conv_counter, stage, kernel[l],level+1)
+                    scale_name1 = 'Mconv%d_stage%d_1x%d_L%d' % (conv_counter, stage, kernel[l],level+1)
                 if layername[l+1] == 'L2' or layername[l+1] == 'L3':
                     if level == 0:
                         outCH[l] = 38
                     else:
                         outCH[l] = 19
-                n.tops[conv_name1] = L.Convolution(n.tops[last_layer[level]], kernel_h=1,kernel_w=7,
+                n.tops[conv_name1] = L.Convolution(n.tops[last_layer[level]], kernel_h=1,kernel_w=kernel[l],
                                                       num_output=outCH[l], pad_h=0,pad_w=3,
                                                       param=[dict(lr_mult=lr_m, decay_mult=1), dict(lr_mult=lr_m*2, decay_mult=0)],
                                                       weight_filler=dict(type='gaussian', std=0.01),
                                                       bias_filler=dict(type='constant'))
                 last_layer[level] = conv_name1
+        
+                n.tops[bn_name1] = L.BatchNorm(n.tops[last_layer[level]],in_place=True,
+                                                     param=[dict(lr_mult=0), dict(lr_mult=0), dict(lr_mult=0)],
+                                                     batch_norm_param=dict(use_global_stats=False))
+                n.tops[scale_name1] = L.Scale(n.tops[last_layer[level]], in_place=True,
+                                             param=[dict(lr_mult=1.0,decay_mult=1.0),dict(lr_mult=1.0,decay_mult=0)],
+                                             scale_param=dict(axis=1,num_axes=1,filler=dict(type='constant', value=1.0),
+                                             bias_filler=dict(type='constant', value=0.0),bias_term=True))
+                ReLUname = 'Mrelu%d_stage%d_1x%d_L%d' % (conv_counter, stage, kernel[l],level+1)
+                n.tops[ReLUname] = L.ReLU(n.tops[last_layer[level]], in_place=True)
                 
-                #ReLUname = 'Mrelu%d_stage%d_1x7_L%d' % (conv_counter, stage, level+1)
-                #n.tops[ReLUname] = L.ReLU(n.tops[last_layer[level]], in_place=True)
-                
-                n.tops[conv_name2] = L.Convolution(n.tops[last_layer[level]], kernel_h=7,kernel_w=1,
+                n.tops[conv_name2] = L.Convolution(n.tops[last_layer[level]], kernel_h=kernel[l],kernel_w=1,
                                                       num_output=outCH[l],  pad_h=3,pad_w=0,
                                                       param=[dict(lr_mult=lr_m, decay_mult=1), dict(lr_mult=lr_m*2, decay_mult=0)],
                                                       weight_filler=dict(type='gaussian', std=0.01),
@@ -200,11 +208,14 @@ def setLayers_twoBranches(data_source, batch_size, layername, kernel, stride, ou
                     else:
                         if(batchnorm == 1):
                             batchnorm_name = 'Mbn%d_stage%d_L%d' % (conv_counter, stage, level+1)
-                            n.tops[batchnorm_name] = L.BatchNorm(n.tops[last_layer[level]], 
-                                                                 param=[dict(lr_mult=0), dict(lr_mult=0), dict(lr_mult=0)])
-                                                                 #scale_filler=dict(type='constant', value=1), shift_filler=dict(type='constant', value=0.001))
-                            last_layer[level] = batchnorm_name
-                        ReLUname = 'Mrelu%d_stage%d_7x1_L%d' % (conv_counter, stage, level+1)
+                            n.tops[batchnorm_name] = L.BatchNorm(n.tops[last_layer[level]],in_place=True,
+                                                     param=[dict(lr_mult=0), dict(lr_mult=0), dict(lr_mult=0)],
+                                                     batch_norm_param=dict(use_global_stats=False))
+                            n.tops[scale_name1] = L.Scale(n.tops[last_layer[level]], in_place=True,
+                                             param=[dict(lr_mult=1.0,decay_mult=1.0),dict(lr_mult=1.0,decay_mult=0)],
+                                             scale_param=dict(axis=1,num_axes=1,filler=dict(type='constant', value=1.0),
+                                             bias_filler=dict(type='constant', value=0.0),bias_term=True))
+                        ReLUname = 'Mrelu%d_stage%d_%dx1_L%d' % (conv_counter, stage, kernel[l],level+1)
                         n.tops[ReLUname] = L.ReLU(n.tops[last_layer[level]], in_place=True)
                     print ReLUname
 

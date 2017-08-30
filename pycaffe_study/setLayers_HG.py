@@ -34,10 +34,11 @@ def conv_f(bottom,ks,nout,stride=1,pad=0):
                          weight_filler=dict(type='msra'))
     return conv
 
+#upsampling with deconv using filter 'Bilinear'
 def deconv_f(bottom,ks,nout,stride=2,pad=0):
     deconv = L.Deconvolution(bottom, convolution_param=dict(num_output=nout, 
                             kernel_size=ks, stride=stride, pad=[0],group=nout,
-                             weight_filler=dict(type='constant', value=1), bias_term=False),
+                             weight_filler=dict(type='bilinear'), bias_term=False),
                              param=dict(lr_mult=0, decay_mult=0))
     return deconv
 

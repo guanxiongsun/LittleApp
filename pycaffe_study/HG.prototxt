@@ -2213,8 +2213,7 @@ layer {
     group: 256
     stride: 2
     weight_filler {
-      type: "constant"
-      value: 1.0
+      type: "bilinear"
     }
   }
 }
@@ -2402,8 +2401,7 @@ layer {
     group: 256
     stride: 2
     weight_filler {
-      type: "constant"
-      value: 1.0
+      type: "bilinear"
     }
   }
 }
@@ -2591,8 +2589,7 @@ layer {
     group: 256
     stride: 2
     weight_filler {
-      type: "constant"
-      value: 1.0
+      type: "bilinear"
     }
   }
 }
@@ -2780,8 +2777,7 @@ layer {
     group: 256
     stride: 2
     weight_filler {
-      type: "constant"
-      value: 1.0
+      type: "bilinear"
     }
   }
 }
@@ -4931,8 +4927,7 @@ layer {
     group: 256
     stride: 2
     weight_filler {
-      type: "constant"
-      value: 1.0
+      type: "bilinear"
     }
   }
 }
@@ -5120,8 +5115,7 @@ layer {
     group: 256
     stride: 2
     weight_filler {
-      type: "constant"
-      value: 1.0
+      type: "bilinear"
     }
   }
 }
@@ -5309,8 +5303,7 @@ layer {
     group: 256
     stride: 2
     weight_filler {
-      type: "constant"
-      value: 1.0
+      type: "bilinear"
     }
   }
 }
@@ -5498,8 +5491,7 @@ layer {
     group: 256
     stride: 2
     weight_filler {
-      type: "constant"
-      value: 1.0
+      type: "bilinear"
     }
   }
 }
@@ -7649,8 +7641,7 @@ layer {
     group: 256
     stride: 2
     weight_filler {
-      type: "constant"
-      value: 1.0
+      type: "bilinear"
     }
   }
 }
@@ -7838,8 +7829,7 @@ layer {
     group: 256
     stride: 2
     weight_filler {
-      type: "constant"
-      value: 1.0
+      type: "bilinear"
     }
   }
 }
@@ -8027,8 +8017,7 @@ layer {
     group: 256
     stride: 2
     weight_filler {
-      type: "constant"
-      value: 1.0
+      type: "bilinear"
     }
   }
 }
@@ -8216,8 +8205,7 @@ layer {
     group: 256
     stride: 2
     weight_filler {
-      type: "constant"
-      value: 1.0
+      type: "bilinear"
     }
   }
 }

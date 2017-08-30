@@ -88,7 +88,7 @@ def hourglass(inputs, nRepeats, nFeatures):
     return addition
  
 def lin(inputs, numOut):
-    return conv_bn_sc_rl(inputs, [1,1], numOut);
+    return conv_bn_sc_rl(inputs, 1, numOut);
 
 def createModel(nFeatures, nStacks, nRepeats):
     # now, this code can't recognize include phase, so there will only be a TEST phase data layer
@@ -118,8 +118,9 @@ def createModel(nFeatures, nStacks, nRepeats):
             back1 = conv_f(ll1,1,nFeatures);
             back2 = conv_f(tmpOut1,1,nFeatures);
             back3 = conv_f(tmpOut2,1,nFeatures);
+            back4 = conv_f(ll2,1,nFeatures);
             
-            addition = L.Eltwise(back1,back2,back3,operation=P.Eltwise.SUM);
+            addition = L.Eltwise(back1,back2,back3,back4,operation=P.Eltwise.SUM);
             
             inputs = addition;
     return to_proto(tmpOut1,tmpOut2)

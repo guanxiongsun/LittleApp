@@ -2958,7 +2958,6 @@ layer {
     bias_term: false
     pad: 0
     kernel_size: 1
-    kernel_size: 1
     stride: 1
     weight_filler {
       type: "msra"
@@ -3213,7 +3212,6 @@ layer {
     bias_term: false
     pad: 0
     kernel_size: 1
-    kernel_size: 1
     stride: 1
     weight_filler {
       type: "msra"
@@ -3286,11 +3284,28 @@ layer {
   }
 }
 layer {
+  name: "Convolution65"
+  type: "Convolution"
+  bottom: "Convolution62"
+  top: "Convolution65"
+  convolution_param {
+    num_output: 256
+    bias_term: false
+    pad: 0
+    kernel_size: 1
+    stride: 1
+    weight_filler {
+      type: "msra"
+    }
+  }
+}
+layer {
   name: "Eltwise23"
   type: "Eltwise"
   bottom: "Convolution56"
   bottom: "Convolution58"
   bottom: "Convolution64"
+  bottom: "Convolution65"
   top: "Eltwise23"
   eltwise_param {
     operation: SUM
@@ -3330,10 +3345,10 @@ layer {
   top: "BatchNorm58"
 }
 layer {
-  name: "Convolution65"
+  name: "Convolution66"
   type: "Convolution"
   bottom: "BatchNorm58"
-  top: "Convolution65"
+  top: "Convolution66"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -3348,8 +3363,8 @@ layer {
 layer {
   name: "BatchNorm59"
   type: "BatchNorm"
-  bottom: "Convolution65"
-  top: "Convolution65"
+  bottom: "Convolution66"
+  top: "Convolution66"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -3366,8 +3381,8 @@ layer {
 layer {
   name: "Scale59"
   type: "Scale"
-  bottom: "Convolution65"
-  top: "Convolution65"
+  bottom: "Convolution66"
+  top: "Convolution66"
   scale_param {
     bias_term: true
   }
@@ -3375,14 +3390,14 @@ layer {
 layer {
   name: "ReLU40"
   type: "ReLU"
-  bottom: "Convolution65"
-  top: "Convolution65"
+  bottom: "Convolution66"
+  top: "Convolution66"
 }
 layer {
-  name: "Convolution66"
+  name: "Convolution67"
   type: "Convolution"
-  bottom: "Convolution65"
-  top: "Convolution66"
+  bottom: "Convolution66"
+  top: "Convolution67"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -3397,8 +3412,8 @@ layer {
 layer {
   name: "BatchNorm60"
   type: "BatchNorm"
-  bottom: "Convolution66"
-  top: "Convolution66"
+  bottom: "Convolution67"
+  top: "Convolution67"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -3415,8 +3430,8 @@ layer {
 layer {
   name: "Scale60"
   type: "Scale"
-  bottom: "Convolution66"
-  top: "Convolution66"
+  bottom: "Convolution67"
+  top: "Convolution67"
   scale_param {
     bias_term: true
   }
@@ -3424,14 +3439,14 @@ layer {
 layer {
   name: "ReLU41"
   type: "ReLU"
-  bottom: "Convolution66"
-  top: "Convolution66"
+  bottom: "Convolution67"
+  top: "Convolution67"
 }
 layer {
-  name: "Convolution67"
+  name: "Convolution68"
   type: "Convolution"
-  bottom: "Convolution66"
-  top: "Convolution67"
+  bottom: "Convolution67"
+  top: "Convolution68"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -3447,7 +3462,7 @@ layer {
   name: "Eltwise24"
   type: "Eltwise"
   bottom: "Eltwise23"
-  bottom: "Convolution67"
+  bottom: "Convolution68"
   top: "Eltwise24"
   eltwise_param {
     operation: SUM
@@ -3498,10 +3513,10 @@ layer {
   top: "BatchNorm61"
 }
 layer {
-  name: "Convolution68"
+  name: "Convolution69"
   type: "Convolution"
   bottom: "BatchNorm61"
-  top: "Convolution68"
+  top: "Convolution69"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -3516,8 +3531,8 @@ layer {
 layer {
   name: "BatchNorm62"
   type: "BatchNorm"
-  bottom: "Convolution68"
-  top: "Convolution68"
+  bottom: "Convolution69"
+  top: "Convolution69"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -3534,8 +3549,8 @@ layer {
 layer {
   name: "Scale62"
   type: "Scale"
-  bottom: "Convolution68"
-  top: "Convolution68"
+  bottom: "Convolution69"
+  top: "Convolution69"
   scale_param {
     bias_term: true
   }
@@ -3543,14 +3558,14 @@ layer {
 layer {
   name: "ReLU42"
   type: "ReLU"
-  bottom: "Convolution68"
-  top: "Convolution68"
+  bottom: "Convolution69"
+  top: "Convolution69"
 }
 layer {
-  name: "Convolution69"
+  name: "Convolution70"
   type: "Convolution"
-  bottom: "Convolution68"
-  top: "Convolution69"
+  bottom: "Convolution69"
+  top: "Convolution70"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -3565,8 +3580,8 @@ layer {
 layer {
   name: "BatchNorm63"
   type: "BatchNorm"
-  bottom: "Convolution69"
-  top: "Convolution69"
+  bottom: "Convolution70"
+  top: "Convolution70"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -3583,8 +3598,8 @@ layer {
 layer {
   name: "Scale63"
   type: "Scale"
-  bottom: "Convolution69"
-  top: "Convolution69"
+  bottom: "Convolution70"
+  top: "Convolution70"
   scale_param {
     bias_term: true
   }
@@ -3592,14 +3607,14 @@ layer {
 layer {
   name: "ReLU43"
   type: "ReLU"
-  bottom: "Convolution69"
-  top: "Convolution69"
+  bottom: "Convolution70"
+  top: "Convolution70"
 }
 layer {
-  name: "Convolution70"
+  name: "Convolution71"
   type: "Convolution"
-  bottom: "Convolution69"
-  top: "Convolution70"
+  bottom: "Convolution70"
+  top: "Convolution71"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -3615,7 +3630,7 @@ layer {
   name: "Eltwise25"
   type: "Eltwise"
   bottom: "Pooling6"
-  bottom: "Convolution70"
+  bottom: "Convolution71"
   top: "Eltwise25"
   eltwise_param {
     operation: SUM
@@ -3655,10 +3670,10 @@ layer {
   top: "BatchNorm64"
 }
 layer {
-  name: "Convolution71"
+  name: "Convolution72"
   type: "Convolution"
   bottom: "BatchNorm64"
-  top: "Convolution71"
+  top: "Convolution72"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -3673,8 +3688,8 @@ layer {
 layer {
   name: "BatchNorm65"
   type: "BatchNorm"
-  bottom: "Convolution71"
-  top: "Convolution71"
+  bottom: "Convolution72"
+  top: "Convolution72"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -3691,8 +3706,8 @@ layer {
 layer {
   name: "Scale65"
   type: "Scale"
-  bottom: "Convolution71"
-  top: "Convolution71"
+  bottom: "Convolution72"
+  top: "Convolution72"
   scale_param {
     bias_term: true
   }
@@ -3700,14 +3715,14 @@ layer {
 layer {
   name: "ReLU44"
   type: "ReLU"
-  bottom: "Convolution71"
-  top: "Convolution71"
+  bottom: "Convolution72"
+  top: "Convolution72"
 }
 layer {
-  name: "Convolution72"
+  name: "Convolution73"
   type: "Convolution"
-  bottom: "Convolution71"
-  top: "Convolution72"
+  bottom: "Convolution72"
+  top: "Convolution73"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -3722,8 +3737,8 @@ layer {
 layer {
   name: "BatchNorm66"
   type: "BatchNorm"
-  bottom: "Convolution72"
-  top: "Convolution72"
+  bottom: "Convolution73"
+  top: "Convolution73"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -3740,8 +3755,8 @@ layer {
 layer {
   name: "Scale66"
   type: "Scale"
-  bottom: "Convolution72"
-  top: "Convolution72"
+  bottom: "Convolution73"
+  top: "Convolution73"
   scale_param {
     bias_term: true
   }
@@ -3749,14 +3764,14 @@ layer {
 layer {
   name: "ReLU45"
   type: "ReLU"
-  bottom: "Convolution72"
-  top: "Convolution72"
+  bottom: "Convolution73"
+  top: "Convolution73"
 }
 layer {
-  name: "Convolution73"
+  name: "Convolution74"
   type: "Convolution"
-  bottom: "Convolution72"
-  top: "Convolution73"
+  bottom: "Convolution73"
+  top: "Convolution74"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -3772,7 +3787,7 @@ layer {
   name: "Eltwise26"
   type: "Eltwise"
   bottom: "Eltwise25"
-  bottom: "Convolution73"
+  bottom: "Convolution74"
   top: "Eltwise26"
   eltwise_param {
     operation: SUM
@@ -3823,10 +3838,10 @@ layer {
   top: "BatchNorm67"
 }
 layer {
-  name: "Convolution74"
+  name: "Convolution75"
   type: "Convolution"
   bottom: "BatchNorm67"
-  top: "Convolution74"
+  top: "Convolution75"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -3841,8 +3856,8 @@ layer {
 layer {
   name: "BatchNorm68"
   type: "BatchNorm"
-  bottom: "Convolution74"
-  top: "Convolution74"
+  bottom: "Convolution75"
+  top: "Convolution75"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -3859,8 +3874,8 @@ layer {
 layer {
   name: "Scale68"
   type: "Scale"
-  bottom: "Convolution74"
-  top: "Convolution74"
+  bottom: "Convolution75"
+  top: "Convolution75"
   scale_param {
     bias_term: true
   }
@@ -3868,14 +3883,14 @@ layer {
 layer {
   name: "ReLU46"
   type: "ReLU"
-  bottom: "Convolution74"
-  top: "Convolution74"
+  bottom: "Convolution75"
+  top: "Convolution75"
 }
 layer {
-  name: "Convolution75"
+  name: "Convolution76"
   type: "Convolution"
-  bottom: "Convolution74"
-  top: "Convolution75"
+  bottom: "Convolution75"
+  top: "Convolution76"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -3890,8 +3905,8 @@ layer {
 layer {
   name: "BatchNorm69"
   type: "BatchNorm"
-  bottom: "Convolution75"
-  top: "Convolution75"
+  bottom: "Convolution76"
+  top: "Convolution76"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -3908,8 +3923,8 @@ layer {
 layer {
   name: "Scale69"
   type: "Scale"
-  bottom: "Convolution75"
-  top: "Convolution75"
+  bottom: "Convolution76"
+  top: "Convolution76"
   scale_param {
     bias_term: true
   }
@@ -3917,14 +3932,14 @@ layer {
 layer {
   name: "ReLU47"
   type: "ReLU"
-  bottom: "Convolution75"
-  top: "Convolution75"
+  bottom: "Convolution76"
+  top: "Convolution76"
 }
 layer {
-  name: "Convolution76"
+  name: "Convolution77"
   type: "Convolution"
-  bottom: "Convolution75"
-  top: "Convolution76"
+  bottom: "Convolution76"
+  top: "Convolution77"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -3940,7 +3955,7 @@ layer {
   name: "Eltwise27"
   type: "Eltwise"
   bottom: "Pooling7"
-  bottom: "Convolution76"
+  bottom: "Convolution77"
   top: "Eltwise27"
   eltwise_param {
     operation: SUM
@@ -3980,10 +3995,10 @@ layer {
   top: "BatchNorm70"
 }
 layer {
-  name: "Convolution77"
+  name: "Convolution78"
   type: "Convolution"
   bottom: "BatchNorm70"
-  top: "Convolution77"
+  top: "Convolution78"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -3998,8 +4013,8 @@ layer {
 layer {
   name: "BatchNorm71"
   type: "BatchNorm"
-  bottom: "Convolution77"
-  top: "Convolution77"
+  bottom: "Convolution78"
+  top: "Convolution78"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -4016,8 +4031,8 @@ layer {
 layer {
   name: "Scale71"
   type: "Scale"
-  bottom: "Convolution77"
-  top: "Convolution77"
+  bottom: "Convolution78"
+  top: "Convolution78"
   scale_param {
     bias_term: true
   }
@@ -4025,14 +4040,14 @@ layer {
 layer {
   name: "ReLU48"
   type: "ReLU"
-  bottom: "Convolution77"
-  top: "Convolution77"
+  bottom: "Convolution78"
+  top: "Convolution78"
 }
 layer {
-  name: "Convolution78"
+  name: "Convolution79"
   type: "Convolution"
-  bottom: "Convolution77"
-  top: "Convolution78"
+  bottom: "Convolution78"
+  top: "Convolution79"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -4047,8 +4062,8 @@ layer {
 layer {
   name: "BatchNorm72"
   type: "BatchNorm"
-  bottom: "Convolution78"
-  top: "Convolution78"
+  bottom: "Convolution79"
+  top: "Convolution79"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -4065,8 +4080,8 @@ layer {
 layer {
   name: "Scale72"
   type: "Scale"
-  bottom: "Convolution78"
-  top: "Convolution78"
+  bottom: "Convolution79"
+  top: "Convolution79"
   scale_param {
     bias_term: true
   }
@@ -4074,14 +4089,14 @@ layer {
 layer {
   name: "ReLU49"
   type: "ReLU"
-  bottom: "Convolution78"
-  top: "Convolution78"
+  bottom: "Convolution79"
+  top: "Convolution79"
 }
 layer {
-  name: "Convolution79"
+  name: "Convolution80"
   type: "Convolution"
-  bottom: "Convolution78"
-  top: "Convolution79"
+  bottom: "Convolution79"
+  top: "Convolution80"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -4097,7 +4112,7 @@ layer {
   name: "Eltwise28"
   type: "Eltwise"
   bottom: "Eltwise27"
-  bottom: "Convolution79"
+  bottom: "Convolution80"
   top: "Eltwise28"
   eltwise_param {
     operation: SUM
@@ -4148,10 +4163,10 @@ layer {
   top: "BatchNorm73"
 }
 layer {
-  name: "Convolution80"
+  name: "Convolution81"
   type: "Convolution"
   bottom: "BatchNorm73"
-  top: "Convolution80"
+  top: "Convolution81"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -4166,8 +4181,8 @@ layer {
 layer {
   name: "BatchNorm74"
   type: "BatchNorm"
-  bottom: "Convolution80"
-  top: "Convolution80"
+  bottom: "Convolution81"
+  top: "Convolution81"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -4184,8 +4199,8 @@ layer {
 layer {
   name: "Scale74"
   type: "Scale"
-  bottom: "Convolution80"
-  top: "Convolution80"
+  bottom: "Convolution81"
+  top: "Convolution81"
   scale_param {
     bias_term: true
   }
@@ -4193,14 +4208,14 @@ layer {
 layer {
   name: "ReLU50"
   type: "ReLU"
-  bottom: "Convolution80"
-  top: "Convolution80"
+  bottom: "Convolution81"
+  top: "Convolution81"
 }
 layer {
-  name: "Convolution81"
+  name: "Convolution82"
   type: "Convolution"
-  bottom: "Convolution80"
-  top: "Convolution81"
+  bottom: "Convolution81"
+  top: "Convolution82"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -4215,8 +4230,8 @@ layer {
 layer {
   name: "BatchNorm75"
   type: "BatchNorm"
-  bottom: "Convolution81"
-  top: "Convolution81"
+  bottom: "Convolution82"
+  top: "Convolution82"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -4233,8 +4248,8 @@ layer {
 layer {
   name: "Scale75"
   type: "Scale"
-  bottom: "Convolution81"
-  top: "Convolution81"
+  bottom: "Convolution82"
+  top: "Convolution82"
   scale_param {
     bias_term: true
   }
@@ -4242,14 +4257,14 @@ layer {
 layer {
   name: "ReLU51"
   type: "ReLU"
-  bottom: "Convolution81"
-  top: "Convolution81"
+  bottom: "Convolution82"
+  top: "Convolution82"
 }
 layer {
-  name: "Convolution82"
+  name: "Convolution83"
   type: "Convolution"
-  bottom: "Convolution81"
-  top: "Convolution82"
+  bottom: "Convolution82"
+  top: "Convolution83"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -4265,7 +4280,7 @@ layer {
   name: "Eltwise29"
   type: "Eltwise"
   bottom: "Pooling8"
-  bottom: "Convolution82"
+  bottom: "Convolution83"
   top: "Eltwise29"
   eltwise_param {
     operation: SUM
@@ -4305,10 +4320,10 @@ layer {
   top: "BatchNorm76"
 }
 layer {
-  name: "Convolution83"
+  name: "Convolution84"
   type: "Convolution"
   bottom: "BatchNorm76"
-  top: "Convolution83"
+  top: "Convolution84"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -4323,8 +4338,8 @@ layer {
 layer {
   name: "BatchNorm77"
   type: "BatchNorm"
-  bottom: "Convolution83"
-  top: "Convolution83"
+  bottom: "Convolution84"
+  top: "Convolution84"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -4341,8 +4356,8 @@ layer {
 layer {
   name: "Scale77"
   type: "Scale"
-  bottom: "Convolution83"
-  top: "Convolution83"
+  bottom: "Convolution84"
+  top: "Convolution84"
   scale_param {
     bias_term: true
   }
@@ -4350,14 +4365,14 @@ layer {
 layer {
   name: "ReLU52"
   type: "ReLU"
-  bottom: "Convolution83"
-  top: "Convolution83"
+  bottom: "Convolution84"
+  top: "Convolution84"
 }
 layer {
-  name: "Convolution84"
+  name: "Convolution85"
   type: "Convolution"
-  bottom: "Convolution83"
-  top: "Convolution84"
+  bottom: "Convolution84"
+  top: "Convolution85"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -4372,8 +4387,8 @@ layer {
 layer {
   name: "BatchNorm78"
   type: "BatchNorm"
-  bottom: "Convolution84"
-  top: "Convolution84"
+  bottom: "Convolution85"
+  top: "Convolution85"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -4390,8 +4405,8 @@ layer {
 layer {
   name: "Scale78"
   type: "Scale"
-  bottom: "Convolution84"
-  top: "Convolution84"
+  bottom: "Convolution85"
+  top: "Convolution85"
   scale_param {
     bias_term: true
   }
@@ -4399,14 +4414,14 @@ layer {
 layer {
   name: "ReLU53"
   type: "ReLU"
-  bottom: "Convolution84"
-  top: "Convolution84"
+  bottom: "Convolution85"
+  top: "Convolution85"
 }
 layer {
-  name: "Convolution85"
+  name: "Convolution86"
   type: "Convolution"
-  bottom: "Convolution84"
-  top: "Convolution85"
+  bottom: "Convolution85"
+  top: "Convolution86"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -4422,7 +4437,7 @@ layer {
   name: "Eltwise30"
   type: "Eltwise"
   bottom: "Eltwise29"
-  bottom: "Convolution85"
+  bottom: "Convolution86"
   top: "Eltwise30"
   eltwise_param {
     operation: SUM
@@ -4473,10 +4488,10 @@ layer {
   top: "BatchNorm79"
 }
 layer {
-  name: "Convolution86"
+  name: "Convolution87"
   type: "Convolution"
   bottom: "BatchNorm79"
-  top: "Convolution86"
+  top: "Convolution87"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -4491,8 +4506,8 @@ layer {
 layer {
   name: "BatchNorm80"
   type: "BatchNorm"
-  bottom: "Convolution86"
-  top: "Convolution86"
+  bottom: "Convolution87"
+  top: "Convolution87"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -4509,8 +4524,8 @@ layer {
 layer {
   name: "Scale80"
   type: "Scale"
-  bottom: "Convolution86"
-  top: "Convolution86"
+  bottom: "Convolution87"
+  top: "Convolution87"
   scale_param {
     bias_term: true
   }
@@ -4518,14 +4533,14 @@ layer {
 layer {
   name: "ReLU54"
   type: "ReLU"
-  bottom: "Convolution86"
-  top: "Convolution86"
+  bottom: "Convolution87"
+  top: "Convolution87"
 }
 layer {
-  name: "Convolution87"
+  name: "Convolution88"
   type: "Convolution"
-  bottom: "Convolution86"
-  top: "Convolution87"
+  bottom: "Convolution87"
+  top: "Convolution88"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -4540,8 +4555,8 @@ layer {
 layer {
   name: "BatchNorm81"
   type: "BatchNorm"
-  bottom: "Convolution87"
-  top: "Convolution87"
+  bottom: "Convolution88"
+  top: "Convolution88"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -4558,8 +4573,8 @@ layer {
 layer {
   name: "Scale81"
   type: "Scale"
-  bottom: "Convolution87"
-  top: "Convolution87"
+  bottom: "Convolution88"
+  top: "Convolution88"
   scale_param {
     bias_term: true
   }
@@ -4567,14 +4582,14 @@ layer {
 layer {
   name: "ReLU55"
   type: "ReLU"
-  bottom: "Convolution87"
-  top: "Convolution87"
+  bottom: "Convolution88"
+  top: "Convolution88"
 }
 layer {
-  name: "Convolution88"
+  name: "Convolution89"
   type: "Convolution"
-  bottom: "Convolution87"
-  top: "Convolution88"
+  bottom: "Convolution88"
+  top: "Convolution89"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -4590,7 +4605,7 @@ layer {
   name: "Eltwise31"
   type: "Eltwise"
   bottom: "Pooling9"
-  bottom: "Convolution88"
+  bottom: "Convolution89"
   top: "Eltwise31"
   eltwise_param {
     operation: SUM
@@ -4630,10 +4645,10 @@ layer {
   top: "BatchNorm82"
 }
 layer {
-  name: "Convolution89"
+  name: "Convolution90"
   type: "Convolution"
   bottom: "BatchNorm82"
-  top: "Convolution89"
+  top: "Convolution90"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -4648,8 +4663,8 @@ layer {
 layer {
   name: "BatchNorm83"
   type: "BatchNorm"
-  bottom: "Convolution89"
-  top: "Convolution89"
+  bottom: "Convolution90"
+  top: "Convolution90"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -4666,8 +4681,8 @@ layer {
 layer {
   name: "Scale83"
   type: "Scale"
-  bottom: "Convolution89"
-  top: "Convolution89"
+  bottom: "Convolution90"
+  top: "Convolution90"
   scale_param {
     bias_term: true
   }
@@ -4675,14 +4690,14 @@ layer {
 layer {
   name: "ReLU56"
   type: "ReLU"
-  bottom: "Convolution89"
-  top: "Convolution89"
+  bottom: "Convolution90"
+  top: "Convolution90"
 }
 layer {
-  name: "Convolution90"
+  name: "Convolution91"
   type: "Convolution"
-  bottom: "Convolution89"
-  top: "Convolution90"
+  bottom: "Convolution90"
+  top: "Convolution91"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -4697,8 +4712,8 @@ layer {
 layer {
   name: "BatchNorm84"
   type: "BatchNorm"
-  bottom: "Convolution90"
-  top: "Convolution90"
+  bottom: "Convolution91"
+  top: "Convolution91"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -4715,8 +4730,8 @@ layer {
 layer {
   name: "Scale84"
   type: "Scale"
-  bottom: "Convolution90"
-  top: "Convolution90"
+  bottom: "Convolution91"
+  top: "Convolution91"
   scale_param {
     bias_term: true
   }
@@ -4724,14 +4739,14 @@ layer {
 layer {
   name: "ReLU57"
   type: "ReLU"
-  bottom: "Convolution90"
-  top: "Convolution90"
+  bottom: "Convolution91"
+  top: "Convolution91"
 }
 layer {
-  name: "Convolution91"
+  name: "Convolution92"
   type: "Convolution"
-  bottom: "Convolution90"
-  top: "Convolution91"
+  bottom: "Convolution91"
+  top: "Convolution92"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -4747,7 +4762,7 @@ layer {
   name: "Eltwise32"
   type: "Eltwise"
   bottom: "Eltwise31"
-  bottom: "Convolution91"
+  bottom: "Convolution92"
   top: "Eltwise32"
   eltwise_param {
     operation: SUM
@@ -4787,10 +4802,10 @@ layer {
   top: "BatchNorm85"
 }
 layer {
-  name: "Convolution92"
+  name: "Convolution93"
   type: "Convolution"
   bottom: "BatchNorm85"
-  top: "Convolution92"
+  top: "Convolution93"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -4805,8 +4820,8 @@ layer {
 layer {
   name: "BatchNorm86"
   type: "BatchNorm"
-  bottom: "Convolution92"
-  top: "Convolution92"
+  bottom: "Convolution93"
+  top: "Convolution93"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -4823,8 +4838,8 @@ layer {
 layer {
   name: "Scale86"
   type: "Scale"
-  bottom: "Convolution92"
-  top: "Convolution92"
+  bottom: "Convolution93"
+  top: "Convolution93"
   scale_param {
     bias_term: true
   }
@@ -4832,14 +4847,14 @@ layer {
 layer {
   name: "ReLU58"
   type: "ReLU"
-  bottom: "Convolution92"
-  top: "Convolution92"
+  bottom: "Convolution93"
+  top: "Convolution93"
 }
 layer {
-  name: "Convolution93"
+  name: "Convolution94"
   type: "Convolution"
-  bottom: "Convolution92"
-  top: "Convolution93"
+  bottom: "Convolution93"
+  top: "Convolution94"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -4854,8 +4869,8 @@ layer {
 layer {
   name: "BatchNorm87"
   type: "BatchNorm"
-  bottom: "Convolution93"
-  top: "Convolution93"
+  bottom: "Convolution94"
+  top: "Convolution94"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -4872,8 +4887,8 @@ layer {
 layer {
   name: "Scale87"
   type: "Scale"
-  bottom: "Convolution93"
-  top: "Convolution93"
+  bottom: "Convolution94"
+  top: "Convolution94"
   scale_param {
     bias_term: true
   }
@@ -4881,14 +4896,14 @@ layer {
 layer {
   name: "ReLU59"
   type: "ReLU"
-  bottom: "Convolution93"
-  top: "Convolution93"
+  bottom: "Convolution94"
+  top: "Convolution94"
 }
 layer {
-  name: "Convolution94"
+  name: "Convolution95"
   type: "Convolution"
-  bottom: "Convolution93"
-  top: "Convolution94"
+  bottom: "Convolution94"
+  top: "Convolution95"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -4904,7 +4919,7 @@ layer {
   name: "Eltwise33"
   type: "Eltwise"
   bottom: "Eltwise32"
-  bottom: "Convolution94"
+  bottom: "Convolution95"
   top: "Eltwise33"
   eltwise_param {
     operation: SUM
@@ -4975,10 +4990,10 @@ layer {
   top: "BatchNorm88"
 }
 layer {
-  name: "Convolution95"
+  name: "Convolution96"
   type: "Convolution"
   bottom: "BatchNorm88"
-  top: "Convolution95"
+  top: "Convolution96"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -4993,8 +5008,8 @@ layer {
 layer {
   name: "BatchNorm89"
   type: "BatchNorm"
-  bottom: "Convolution95"
-  top: "Convolution95"
+  bottom: "Convolution96"
+  top: "Convolution96"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -5011,8 +5026,8 @@ layer {
 layer {
   name: "Scale89"
   type: "Scale"
-  bottom: "Convolution95"
-  top: "Convolution95"
+  bottom: "Convolution96"
+  top: "Convolution96"
   scale_param {
     bias_term: true
   }
@@ -5020,14 +5035,14 @@ layer {
 layer {
   name: "ReLU60"
   type: "ReLU"
-  bottom: "Convolution95"
-  top: "Convolution95"
+  bottom: "Convolution96"
+  top: "Convolution96"
 }
 layer {
-  name: "Convolution96"
+  name: "Convolution97"
   type: "Convolution"
-  bottom: "Convolution95"
-  top: "Convolution96"
+  bottom: "Convolution96"
+  top: "Convolution97"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -5042,8 +5057,8 @@ layer {
 layer {
   name: "BatchNorm90"
   type: "BatchNorm"
-  bottom: "Convolution96"
-  top: "Convolution96"
+  bottom: "Convolution97"
+  top: "Convolution97"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -5060,8 +5075,8 @@ layer {
 layer {
   name: "Scale90"
   type: "Scale"
-  bottom: "Convolution96"
-  top: "Convolution96"
+  bottom: "Convolution97"
+  top: "Convolution97"
   scale_param {
     bias_term: true
   }
@@ -5069,14 +5084,14 @@ layer {
 layer {
   name: "ReLU61"
   type: "ReLU"
-  bottom: "Convolution96"
-  top: "Convolution96"
+  bottom: "Convolution97"
+  top: "Convolution97"
 }
 layer {
-  name: "Convolution97"
+  name: "Convolution98"
   type: "Convolution"
-  bottom: "Convolution96"
-  top: "Convolution97"
+  bottom: "Convolution97"
+  top: "Convolution98"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -5092,7 +5107,7 @@ layer {
   name: "Eltwise35"
   type: "Eltwise"
   bottom: "Eltwise34"
-  bottom: "Convolution97"
+  bottom: "Convolution98"
   top: "Eltwise35"
   eltwise_param {
     operation: SUM
@@ -5163,10 +5178,10 @@ layer {
   top: "BatchNorm91"
 }
 layer {
-  name: "Convolution98"
+  name: "Convolution99"
   type: "Convolution"
   bottom: "BatchNorm91"
-  top: "Convolution98"
+  top: "Convolution99"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -5181,8 +5196,8 @@ layer {
 layer {
   name: "BatchNorm92"
   type: "BatchNorm"
-  bottom: "Convolution98"
-  top: "Convolution98"
+  bottom: "Convolution99"
+  top: "Convolution99"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -5199,8 +5214,8 @@ layer {
 layer {
   name: "Scale92"
   type: "Scale"
-  bottom: "Convolution98"
-  top: "Convolution98"
+  bottom: "Convolution99"
+  top: "Convolution99"
   scale_param {
     bias_term: true
   }
@@ -5208,14 +5223,14 @@ layer {
 layer {
   name: "ReLU62"
   type: "ReLU"
-  bottom: "Convolution98"
-  top: "Convolution98"
+  bottom: "Convolution99"
+  top: "Convolution99"
 }
 layer {
-  name: "Convolution99"
+  name: "Convolution100"
   type: "Convolution"
-  bottom: "Convolution98"
-  top: "Convolution99"
+  bottom: "Convolution99"
+  top: "Convolution100"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -5230,8 +5245,8 @@ layer {
 layer {
   name: "BatchNorm93"
   type: "BatchNorm"
-  bottom: "Convolution99"
-  top: "Convolution99"
+  bottom: "Convolution100"
+  top: "Convolution100"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -5248,8 +5263,8 @@ layer {
 layer {
   name: "Scale93"
   type: "Scale"
-  bottom: "Convolution99"
-  top: "Convolution99"
+  bottom: "Convolution100"
+  top: "Convolution100"
   scale_param {
     bias_term: true
   }
@@ -5257,14 +5272,14 @@ layer {
 layer {
   name: "ReLU63"
   type: "ReLU"
-  bottom: "Convolution99"
-  top: "Convolution99"
+  bottom: "Convolution100"
+  top: "Convolution100"
 }
 layer {
-  name: "Convolution100"
+  name: "Convolution101"
   type: "Convolution"
-  bottom: "Convolution99"
-  top: "Convolution100"
+  bottom: "Convolution100"
+  top: "Convolution101"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -5280,7 +5295,7 @@ layer {
   name: "Eltwise37"
   type: "Eltwise"
   bottom: "Eltwise36"
-  bottom: "Convolution100"
+  bottom: "Convolution101"
   top: "Eltwise37"
   eltwise_param {
     operation: SUM
@@ -5351,10 +5366,10 @@ layer {
   top: "BatchNorm94"
 }
 layer {
-  name: "Convolution101"
+  name: "Convolution102"
   type: "Convolution"
   bottom: "BatchNorm94"
-  top: "Convolution101"
+  top: "Convolution102"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -5369,8 +5384,8 @@ layer {
 layer {
   name: "BatchNorm95"
   type: "BatchNorm"
-  bottom: "Convolution101"
-  top: "Convolution101"
+  bottom: "Convolution102"
+  top: "Convolution102"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -5387,8 +5402,8 @@ layer {
 layer {
   name: "Scale95"
   type: "Scale"
-  bottom: "Convolution101"
-  top: "Convolution101"
+  bottom: "Convolution102"
+  top: "Convolution102"
   scale_param {
     bias_term: true
   }
@@ -5396,14 +5411,14 @@ layer {
 layer {
   name: "ReLU64"
   type: "ReLU"
-  bottom: "Convolution101"
-  top: "Convolution101"
+  bottom: "Convolution102"
+  top: "Convolution102"
 }
 layer {
-  name: "Convolution102"
+  name: "Convolution103"
   type: "Convolution"
-  bottom: "Convolution101"
-  top: "Convolution102"
+  bottom: "Convolution102"
+  top: "Convolution103"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -5418,8 +5433,8 @@ layer {
 layer {
   name: "BatchNorm96"
   type: "BatchNorm"
-  bottom: "Convolution102"
-  top: "Convolution102"
+  bottom: "Convolution103"
+  top: "Convolution103"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -5436,8 +5451,8 @@ layer {
 layer {
   name: "Scale96"
   type: "Scale"
-  bottom: "Convolution102"
-  top: "Convolution102"
+  bottom: "Convolution103"
+  top: "Convolution103"
   scale_param {
     bias_term: true
   }
@@ -5445,14 +5460,14 @@ layer {
 layer {
   name: "ReLU65"
   type: "ReLU"
-  bottom: "Convolution102"
-  top: "Convolution102"
+  bottom: "Convolution103"
+  top: "Convolution103"
 }
 layer {
-  name: "Convolution103"
+  name: "Convolution104"
   type: "Convolution"
-  bottom: "Convolution102"
-  top: "Convolution103"
+  bottom: "Convolution103"
+  top: "Convolution104"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -5468,7 +5483,7 @@ layer {
   name: "Eltwise39"
   type: "Eltwise"
   bottom: "Eltwise38"
-  bottom: "Convolution103"
+  bottom: "Convolution104"
   top: "Eltwise39"
   eltwise_param {
     operation: SUM
@@ -5539,10 +5554,10 @@ layer {
   top: "BatchNorm97"
 }
 layer {
-  name: "Convolution104"
+  name: "Convolution105"
   type: "Convolution"
   bottom: "BatchNorm97"
-  top: "Convolution104"
+  top: "Convolution105"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -5557,8 +5572,8 @@ layer {
 layer {
   name: "BatchNorm98"
   type: "BatchNorm"
-  bottom: "Convolution104"
-  top: "Convolution104"
+  bottom: "Convolution105"
+  top: "Convolution105"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -5575,8 +5590,8 @@ layer {
 layer {
   name: "Scale98"
   type: "Scale"
-  bottom: "Convolution104"
-  top: "Convolution104"
+  bottom: "Convolution105"
+  top: "Convolution105"
   scale_param {
     bias_term: true
   }
@@ -5584,14 +5599,14 @@ layer {
 layer {
   name: "ReLU66"
   type: "ReLU"
-  bottom: "Convolution104"
-  top: "Convolution104"
+  bottom: "Convolution105"
+  top: "Convolution105"
 }
 layer {
-  name: "Convolution105"
+  name: "Convolution106"
   type: "Convolution"
-  bottom: "Convolution104"
-  top: "Convolution105"
+  bottom: "Convolution105"
+  top: "Convolution106"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -5606,8 +5621,8 @@ layer {
 layer {
   name: "BatchNorm99"
   type: "BatchNorm"
-  bottom: "Convolution105"
-  top: "Convolution105"
+  bottom: "Convolution106"
+  top: "Convolution106"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -5624,8 +5639,8 @@ layer {
 layer {
   name: "Scale99"
   type: "Scale"
-  bottom: "Convolution105"
-  top: "Convolution105"
+  bottom: "Convolution106"
+  top: "Convolution106"
   scale_param {
     bias_term: true
   }
@@ -5633,14 +5648,14 @@ layer {
 layer {
   name: "ReLU67"
   type: "ReLU"
-  bottom: "Convolution105"
-  top: "Convolution105"
+  bottom: "Convolution106"
+  top: "Convolution106"
 }
 layer {
-  name: "Convolution106"
+  name: "Convolution107"
   type: "Convolution"
-  bottom: "Convolution105"
-  top: "Convolution106"
+  bottom: "Convolution106"
+  top: "Convolution107"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -5656,22 +5671,21 @@ layer {
   name: "Eltwise41"
   type: "Eltwise"
   bottom: "Eltwise40"
-  bottom: "Convolution106"
+  bottom: "Convolution107"
   top: "Eltwise41"
   eltwise_param {
     operation: SUM
   }
 }
 layer {
-  name: "Convolution107"
+  name: "Convolution108"
   type: "Convolution"
   bottom: "Eltwise41"
-  top: "Convolution107"
+  top: "Convolution108"
   convolution_param {
     num_output: 256
     bias_term: false
     pad: 0
-    kernel_size: 1
     kernel_size: 1
     stride: 1
     weight_filler {
@@ -5682,8 +5696,8 @@ layer {
 layer {
   name: "BatchNorm100"
   type: "BatchNorm"
-  bottom: "Convolution107"
-  top: "Convolution107"
+  bottom: "Convolution108"
+  top: "Convolution108"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -5700,8 +5714,8 @@ layer {
 layer {
   name: "Scale100"
   type: "Scale"
-  bottom: "Convolution107"
-  top: "Convolution107"
+  bottom: "Convolution108"
+  top: "Convolution108"
   scale_param {
     bias_term: true
   }
@@ -5709,14 +5723,14 @@ layer {
 layer {
   name: "ReLU68"
   type: "ReLU"
-  bottom: "Convolution107"
-  top: "Convolution107"
+  bottom: "Convolution108"
+  top: "Convolution108"
 }
 layer {
-  name: "Convolution108"
+  name: "Convolution109"
   type: "Convolution"
-  bottom: "Convolution107"
-  top: "Convolution108"
+  bottom: "Convolution108"
+  top: "Convolution109"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -5729,10 +5743,10 @@ layer {
   }
 }
 layer {
-  name: "Convolution109"
+  name: "Convolution110"
   type: "Convolution"
-  bottom: "Convolution107"
-  top: "Convolution109"
+  bottom: "Convolution108"
+  top: "Convolution110"
   convolution_param {
     num_output: 38
     bias_term: false
@@ -5745,10 +5759,10 @@ layer {
   }
 }
 layer {
-  name: "Convolution110"
+  name: "Convolution111"
   type: "Convolution"
-  bottom: "Convolution109"
-  top: "Convolution110"
+  bottom: "Convolution110"
+  top: "Convolution111"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -5794,10 +5808,10 @@ layer {
   top: "BatchNorm101"
 }
 layer {
-  name: "Convolution111"
+  name: "Convolution112"
   type: "Convolution"
   bottom: "BatchNorm101"
-  top: "Convolution111"
+  top: "Convolution112"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -5812,8 +5826,8 @@ layer {
 layer {
   name: "BatchNorm102"
   type: "BatchNorm"
-  bottom: "Convolution111"
-  top: "Convolution111"
+  bottom: "Convolution112"
+  top: "Convolution112"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -5830,8 +5844,8 @@ layer {
 layer {
   name: "Scale102"
   type: "Scale"
-  bottom: "Convolution111"
-  top: "Convolution111"
+  bottom: "Convolution112"
+  top: "Convolution112"
   scale_param {
     bias_term: true
   }
@@ -5839,14 +5853,14 @@ layer {
 layer {
   name: "ReLU69"
   type: "ReLU"
-  bottom: "Convolution111"
-  top: "Convolution111"
+  bottom: "Convolution112"
+  top: "Convolution112"
 }
 layer {
-  name: "Convolution112"
+  name: "Convolution113"
   type: "Convolution"
-  bottom: "Convolution111"
-  top: "Convolution112"
+  bottom: "Convolution112"
+  top: "Convolution113"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -5861,8 +5875,8 @@ layer {
 layer {
   name: "BatchNorm103"
   type: "BatchNorm"
-  bottom: "Convolution112"
-  top: "Convolution112"
+  bottom: "Convolution113"
+  top: "Convolution113"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -5879,8 +5893,8 @@ layer {
 layer {
   name: "Scale103"
   type: "Scale"
-  bottom: "Convolution112"
-  top: "Convolution112"
+  bottom: "Convolution113"
+  top: "Convolution113"
   scale_param {
     bias_term: true
   }
@@ -5888,14 +5902,14 @@ layer {
 layer {
   name: "ReLU70"
   type: "ReLU"
-  bottom: "Convolution112"
-  top: "Convolution112"
+  bottom: "Convolution113"
+  top: "Convolution113"
 }
 layer {
-  name: "Convolution113"
+  name: "Convolution114"
   type: "Convolution"
-  bottom: "Convolution112"
-  top: "Convolution113"
+  bottom: "Convolution113"
+  top: "Convolution114"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -5911,22 +5925,21 @@ layer {
   name: "Eltwise42"
   type: "Eltwise"
   bottom: "Eltwise40"
-  bottom: "Convolution113"
+  bottom: "Convolution114"
   top: "Eltwise42"
   eltwise_param {
     operation: SUM
   }
 }
 layer {
-  name: "Convolution114"
+  name: "Convolution115"
   type: "Convolution"
   bottom: "Eltwise42"
-  top: "Convolution114"
+  top: "Convolution115"
   convolution_param {
     num_output: 256
     bias_term: false
     pad: 0
-    kernel_size: 1
     kernel_size: 1
     stride: 1
     weight_filler {
@@ -5937,8 +5950,8 @@ layer {
 layer {
   name: "BatchNorm104"
   type: "BatchNorm"
-  bottom: "Convolution114"
-  top: "Convolution114"
+  bottom: "Convolution115"
+  top: "Convolution115"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -5955,8 +5968,8 @@ layer {
 layer {
   name: "Scale104"
   type: "Scale"
-  bottom: "Convolution114"
-  top: "Convolution114"
+  bottom: "Convolution115"
+  top: "Convolution115"
   scale_param {
     bias_term: true
   }
@@ -5964,14 +5977,14 @@ layer {
 layer {
   name: "ReLU71"
   type: "ReLU"
-  bottom: "Convolution114"
-  top: "Convolution114"
+  bottom: "Convolution115"
+  top: "Convolution115"
 }
 layer {
-  name: "Convolution115"
+  name: "Convolution116"
   type: "Convolution"
-  bottom: "Convolution114"
-  top: "Convolution115"
+  bottom: "Convolution115"
+  top: "Convolution116"
   convolution_param {
     num_output: 19
     bias_term: false
@@ -5984,10 +5997,26 @@ layer {
   }
 }
 layer {
-  name: "Convolution116"
+  name: "Convolution117"
+  type: "Convolution"
+  bottom: "Convolution116"
+  top: "Convolution117"
+  convolution_param {
+    num_output: 256
+    bias_term: false
+    pad: 0
+    kernel_size: 1
+    stride: 1
+    weight_filler {
+      type: "msra"
+    }
+  }
+}
+layer {
+  name: "Convolution118"
   type: "Convolution"
   bottom: "Convolution115"
-  top: "Convolution116"
+  top: "Convolution118"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -6002,9 +6031,10 @@ layer {
 layer {
   name: "Eltwise43"
   type: "Eltwise"
-  bottom: "Convolution108"
-  bottom: "Convolution110"
-  bottom: "Convolution116"
+  bottom: "Convolution109"
+  bottom: "Convolution111"
+  bottom: "Convolution117"
+  bottom: "Convolution118"
   top: "Eltwise43"
   eltwise_param {
     operation: SUM
@@ -6044,10 +6074,10 @@ layer {
   top: "BatchNorm105"
 }
 layer {
-  name: "Convolution117"
+  name: "Convolution119"
   type: "Convolution"
   bottom: "BatchNorm105"
-  top: "Convolution117"
+  top: "Convolution119"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -6062,8 +6092,8 @@ layer {
 layer {
   name: "BatchNorm106"
   type: "BatchNorm"
-  bottom: "Convolution117"
-  top: "Convolution117"
+  bottom: "Convolution119"
+  top: "Convolution119"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -6080,8 +6110,8 @@ layer {
 layer {
   name: "Scale106"
   type: "Scale"
-  bottom: "Convolution117"
-  top: "Convolution117"
+  bottom: "Convolution119"
+  top: "Convolution119"
   scale_param {
     bias_term: true
   }
@@ -6089,14 +6119,14 @@ layer {
 layer {
   name: "ReLU72"
   type: "ReLU"
-  bottom: "Convolution117"
-  top: "Convolution117"
+  bottom: "Convolution119"
+  top: "Convolution119"
 }
 layer {
-  name: "Convolution118"
+  name: "Convolution120"
   type: "Convolution"
-  bottom: "Convolution117"
-  top: "Convolution118"
+  bottom: "Convolution119"
+  top: "Convolution120"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -6111,8 +6141,8 @@ layer {
 layer {
   name: "BatchNorm107"
   type: "BatchNorm"
-  bottom: "Convolution118"
-  top: "Convolution118"
+  bottom: "Convolution120"
+  top: "Convolution120"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -6129,8 +6159,8 @@ layer {
 layer {
   name: "Scale107"
   type: "Scale"
-  bottom: "Convolution118"
-  top: "Convolution118"
+  bottom: "Convolution120"
+  top: "Convolution120"
   scale_param {
     bias_term: true
   }
@@ -6138,14 +6168,14 @@ layer {
 layer {
   name: "ReLU73"
   type: "ReLU"
-  bottom: "Convolution118"
-  top: "Convolution118"
+  bottom: "Convolution120"
+  top: "Convolution120"
 }
 layer {
-  name: "Convolution119"
+  name: "Convolution121"
   type: "Convolution"
-  bottom: "Convolution118"
-  top: "Convolution119"
+  bottom: "Convolution120"
+  top: "Convolution121"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -6161,7 +6191,7 @@ layer {
   name: "Eltwise44"
   type: "Eltwise"
   bottom: "Eltwise43"
-  bottom: "Convolution119"
+  bottom: "Convolution121"
   top: "Eltwise44"
   eltwise_param {
     operation: SUM
@@ -6212,10 +6242,10 @@ layer {
   top: "BatchNorm108"
 }
 layer {
-  name: "Convolution120"
+  name: "Convolution122"
   type: "Convolution"
   bottom: "BatchNorm108"
-  top: "Convolution120"
+  top: "Convolution122"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -6230,8 +6260,8 @@ layer {
 layer {
   name: "BatchNorm109"
   type: "BatchNorm"
-  bottom: "Convolution120"
-  top: "Convolution120"
+  bottom: "Convolution122"
+  top: "Convolution122"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -6248,8 +6278,8 @@ layer {
 layer {
   name: "Scale109"
   type: "Scale"
-  bottom: "Convolution120"
-  top: "Convolution120"
+  bottom: "Convolution122"
+  top: "Convolution122"
   scale_param {
     bias_term: true
   }
@@ -6257,14 +6287,14 @@ layer {
 layer {
   name: "ReLU74"
   type: "ReLU"
-  bottom: "Convolution120"
-  top: "Convolution120"
+  bottom: "Convolution122"
+  top: "Convolution122"
 }
 layer {
-  name: "Convolution121"
+  name: "Convolution123"
   type: "Convolution"
-  bottom: "Convolution120"
-  top: "Convolution121"
+  bottom: "Convolution122"
+  top: "Convolution123"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -6279,8 +6309,8 @@ layer {
 layer {
   name: "BatchNorm110"
   type: "BatchNorm"
-  bottom: "Convolution121"
-  top: "Convolution121"
+  bottom: "Convolution123"
+  top: "Convolution123"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -6297,8 +6327,8 @@ layer {
 layer {
   name: "Scale110"
   type: "Scale"
-  bottom: "Convolution121"
-  top: "Convolution121"
+  bottom: "Convolution123"
+  top: "Convolution123"
   scale_param {
     bias_term: true
   }
@@ -6306,14 +6336,14 @@ layer {
 layer {
   name: "ReLU75"
   type: "ReLU"
-  bottom: "Convolution121"
-  top: "Convolution121"
+  bottom: "Convolution123"
+  top: "Convolution123"
 }
 layer {
-  name: "Convolution122"
+  name: "Convolution124"
   type: "Convolution"
-  bottom: "Convolution121"
-  top: "Convolution122"
+  bottom: "Convolution123"
+  top: "Convolution124"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -6329,7 +6359,7 @@ layer {
   name: "Eltwise45"
   type: "Eltwise"
   bottom: "Pooling10"
-  bottom: "Convolution122"
+  bottom: "Convolution124"
   top: "Eltwise45"
   eltwise_param {
     operation: SUM
@@ -6369,10 +6399,10 @@ layer {
   top: "BatchNorm111"
 }
 layer {
-  name: "Convolution123"
+  name: "Convolution125"
   type: "Convolution"
   bottom: "BatchNorm111"
-  top: "Convolution123"
+  top: "Convolution125"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -6387,8 +6417,8 @@ layer {
 layer {
   name: "BatchNorm112"
   type: "BatchNorm"
-  bottom: "Convolution123"
-  top: "Convolution123"
+  bottom: "Convolution125"
+  top: "Convolution125"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -6405,8 +6435,8 @@ layer {
 layer {
   name: "Scale112"
   type: "Scale"
-  bottom: "Convolution123"
-  top: "Convolution123"
+  bottom: "Convolution125"
+  top: "Convolution125"
   scale_param {
     bias_term: true
   }
@@ -6414,14 +6444,14 @@ layer {
 layer {
   name: "ReLU76"
   type: "ReLU"
-  bottom: "Convolution123"
-  top: "Convolution123"
+  bottom: "Convolution125"
+  top: "Convolution125"
 }
 layer {
-  name: "Convolution124"
+  name: "Convolution126"
   type: "Convolution"
-  bottom: "Convolution123"
-  top: "Convolution124"
+  bottom: "Convolution125"
+  top: "Convolution126"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -6436,8 +6466,8 @@ layer {
 layer {
   name: "BatchNorm113"
   type: "BatchNorm"
-  bottom: "Convolution124"
-  top: "Convolution124"
+  bottom: "Convolution126"
+  top: "Convolution126"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -6454,8 +6484,8 @@ layer {
 layer {
   name: "Scale113"
   type: "Scale"
-  bottom: "Convolution124"
-  top: "Convolution124"
+  bottom: "Convolution126"
+  top: "Convolution126"
   scale_param {
     bias_term: true
   }
@@ -6463,14 +6493,14 @@ layer {
 layer {
   name: "ReLU77"
   type: "ReLU"
-  bottom: "Convolution124"
-  top: "Convolution124"
+  bottom: "Convolution126"
+  top: "Convolution126"
 }
 layer {
-  name: "Convolution125"
+  name: "Convolution127"
   type: "Convolution"
-  bottom: "Convolution124"
-  top: "Convolution125"
+  bottom: "Convolution126"
+  top: "Convolution127"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -6486,7 +6516,7 @@ layer {
   name: "Eltwise46"
   type: "Eltwise"
   bottom: "Eltwise45"
-  bottom: "Convolution125"
+  bottom: "Convolution127"
   top: "Eltwise46"
   eltwise_param {
     operation: SUM
@@ -6537,10 +6567,10 @@ layer {
   top: "BatchNorm114"
 }
 layer {
-  name: "Convolution126"
+  name: "Convolution128"
   type: "Convolution"
   bottom: "BatchNorm114"
-  top: "Convolution126"
+  top: "Convolution128"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -6555,8 +6585,8 @@ layer {
 layer {
   name: "BatchNorm115"
   type: "BatchNorm"
-  bottom: "Convolution126"
-  top: "Convolution126"
+  bottom: "Convolution128"
+  top: "Convolution128"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -6573,8 +6603,8 @@ layer {
 layer {
   name: "Scale115"
   type: "Scale"
-  bottom: "Convolution126"
-  top: "Convolution126"
+  bottom: "Convolution128"
+  top: "Convolution128"
   scale_param {
     bias_term: true
   }
@@ -6582,14 +6612,14 @@ layer {
 layer {
   name: "ReLU78"
   type: "ReLU"
-  bottom: "Convolution126"
-  top: "Convolution126"
+  bottom: "Convolution128"
+  top: "Convolution128"
 }
 layer {
-  name: "Convolution127"
+  name: "Convolution129"
   type: "Convolution"
-  bottom: "Convolution126"
-  top: "Convolution127"
+  bottom: "Convolution128"
+  top: "Convolution129"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -6604,8 +6634,8 @@ layer {
 layer {
   name: "BatchNorm116"
   type: "BatchNorm"
-  bottom: "Convolution127"
-  top: "Convolution127"
+  bottom: "Convolution129"
+  top: "Convolution129"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -6622,8 +6652,8 @@ layer {
 layer {
   name: "Scale116"
   type: "Scale"
-  bottom: "Convolution127"
-  top: "Convolution127"
+  bottom: "Convolution129"
+  top: "Convolution129"
   scale_param {
     bias_term: true
   }
@@ -6631,14 +6661,14 @@ layer {
 layer {
   name: "ReLU79"
   type: "ReLU"
-  bottom: "Convolution127"
-  top: "Convolution127"
+  bottom: "Convolution129"
+  top: "Convolution129"
 }
 layer {
-  name: "Convolution128"
+  name: "Convolution130"
   type: "Convolution"
-  bottom: "Convolution127"
-  top: "Convolution128"
+  bottom: "Convolution129"
+  top: "Convolution130"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -6654,7 +6684,7 @@ layer {
   name: "Eltwise47"
   type: "Eltwise"
   bottom: "Pooling11"
-  bottom: "Convolution128"
+  bottom: "Convolution130"
   top: "Eltwise47"
   eltwise_param {
     operation: SUM
@@ -6694,10 +6724,10 @@ layer {
   top: "BatchNorm117"
 }
 layer {
-  name: "Convolution129"
+  name: "Convolution131"
   type: "Convolution"
   bottom: "BatchNorm117"
-  top: "Convolution129"
+  top: "Convolution131"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -6712,8 +6742,8 @@ layer {
 layer {
   name: "BatchNorm118"
   type: "BatchNorm"
-  bottom: "Convolution129"
-  top: "Convolution129"
+  bottom: "Convolution131"
+  top: "Convolution131"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -6730,8 +6760,8 @@ layer {
 layer {
   name: "Scale118"
   type: "Scale"
-  bottom: "Convolution129"
-  top: "Convolution129"
+  bottom: "Convolution131"
+  top: "Convolution131"
   scale_param {
     bias_term: true
   }
@@ -6739,14 +6769,14 @@ layer {
 layer {
   name: "ReLU80"
   type: "ReLU"
-  bottom: "Convolution129"
-  top: "Convolution129"
+  bottom: "Convolution131"
+  top: "Convolution131"
 }
 layer {
-  name: "Convolution130"
+  name: "Convolution132"
   type: "Convolution"
-  bottom: "Convolution129"
-  top: "Convolution130"
+  bottom: "Convolution131"
+  top: "Convolution132"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -6761,8 +6791,8 @@ layer {
 layer {
   name: "BatchNorm119"
   type: "BatchNorm"
-  bottom: "Convolution130"
-  top: "Convolution130"
+  bottom: "Convolution132"
+  top: "Convolution132"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -6779,8 +6809,8 @@ layer {
 layer {
   name: "Scale119"
   type: "Scale"
-  bottom: "Convolution130"
-  top: "Convolution130"
+  bottom: "Convolution132"
+  top: "Convolution132"
   scale_param {
     bias_term: true
   }
@@ -6788,14 +6818,14 @@ layer {
 layer {
   name: "ReLU81"
   type: "ReLU"
-  bottom: "Convolution130"
-  top: "Convolution130"
+  bottom: "Convolution132"
+  top: "Convolution132"
 }
 layer {
-  name: "Convolution131"
+  name: "Convolution133"
   type: "Convolution"
-  bottom: "Convolution130"
-  top: "Convolution131"
+  bottom: "Convolution132"
+  top: "Convolution133"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -6811,7 +6841,7 @@ layer {
   name: "Eltwise48"
   type: "Eltwise"
   bottom: "Eltwise47"
-  bottom: "Convolution131"
+  bottom: "Convolution133"
   top: "Eltwise48"
   eltwise_param {
     operation: SUM
@@ -6862,10 +6892,10 @@ layer {
   top: "BatchNorm120"
 }
 layer {
-  name: "Convolution132"
+  name: "Convolution134"
   type: "Convolution"
   bottom: "BatchNorm120"
-  top: "Convolution132"
+  top: "Convolution134"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -6880,8 +6910,8 @@ layer {
 layer {
   name: "BatchNorm121"
   type: "BatchNorm"
-  bottom: "Convolution132"
-  top: "Convolution132"
+  bottom: "Convolution134"
+  top: "Convolution134"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -6898,8 +6928,8 @@ layer {
 layer {
   name: "Scale121"
   type: "Scale"
-  bottom: "Convolution132"
-  top: "Convolution132"
+  bottom: "Convolution134"
+  top: "Convolution134"
   scale_param {
     bias_term: true
   }
@@ -6907,14 +6937,14 @@ layer {
 layer {
   name: "ReLU82"
   type: "ReLU"
-  bottom: "Convolution132"
-  top: "Convolution132"
+  bottom: "Convolution134"
+  top: "Convolution134"
 }
 layer {
-  name: "Convolution133"
+  name: "Convolution135"
   type: "Convolution"
-  bottom: "Convolution132"
-  top: "Convolution133"
+  bottom: "Convolution134"
+  top: "Convolution135"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -6929,8 +6959,8 @@ layer {
 layer {
   name: "BatchNorm122"
   type: "BatchNorm"
-  bottom: "Convolution133"
-  top: "Convolution133"
+  bottom: "Convolution135"
+  top: "Convolution135"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -6947,8 +6977,8 @@ layer {
 layer {
   name: "Scale122"
   type: "Scale"
-  bottom: "Convolution133"
-  top: "Convolution133"
+  bottom: "Convolution135"
+  top: "Convolution135"
   scale_param {
     bias_term: true
   }
@@ -6956,14 +6986,14 @@ layer {
 layer {
   name: "ReLU83"
   type: "ReLU"
-  bottom: "Convolution133"
-  top: "Convolution133"
+  bottom: "Convolution135"
+  top: "Convolution135"
 }
 layer {
-  name: "Convolution134"
+  name: "Convolution136"
   type: "Convolution"
-  bottom: "Convolution133"
-  top: "Convolution134"
+  bottom: "Convolution135"
+  top: "Convolution136"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -6979,7 +7009,7 @@ layer {
   name: "Eltwise49"
   type: "Eltwise"
   bottom: "Pooling12"
-  bottom: "Convolution134"
+  bottom: "Convolution136"
   top: "Eltwise49"
   eltwise_param {
     operation: SUM
@@ -7019,10 +7049,10 @@ layer {
   top: "BatchNorm123"
 }
 layer {
-  name: "Convolution135"
+  name: "Convolution137"
   type: "Convolution"
   bottom: "BatchNorm123"
-  top: "Convolution135"
+  top: "Convolution137"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -7037,8 +7067,8 @@ layer {
 layer {
   name: "BatchNorm124"
   type: "BatchNorm"
-  bottom: "Convolution135"
-  top: "Convolution135"
+  bottom: "Convolution137"
+  top: "Convolution137"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -7055,8 +7085,8 @@ layer {
 layer {
   name: "Scale124"
   type: "Scale"
-  bottom: "Convolution135"
-  top: "Convolution135"
+  bottom: "Convolution137"
+  top: "Convolution137"
   scale_param {
     bias_term: true
   }
@@ -7064,14 +7094,14 @@ layer {
 layer {
   name: "ReLU84"
   type: "ReLU"
-  bottom: "Convolution135"
-  top: "Convolution135"
+  bottom: "Convolution137"
+  top: "Convolution137"
 }
 layer {
-  name: "Convolution136"
+  name: "Convolution138"
   type: "Convolution"
-  bottom: "Convolution135"
-  top: "Convolution136"
+  bottom: "Convolution137"
+  top: "Convolution138"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -7086,8 +7116,8 @@ layer {
 layer {
   name: "BatchNorm125"
   type: "BatchNorm"
-  bottom: "Convolution136"
-  top: "Convolution136"
+  bottom: "Convolution138"
+  top: "Convolution138"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -7104,8 +7134,8 @@ layer {
 layer {
   name: "Scale125"
   type: "Scale"
-  bottom: "Convolution136"
-  top: "Convolution136"
+  bottom: "Convolution138"
+  top: "Convolution138"
   scale_param {
     bias_term: true
   }
@@ -7113,14 +7143,14 @@ layer {
 layer {
   name: "ReLU85"
   type: "ReLU"
-  bottom: "Convolution136"
-  top: "Convolution136"
+  bottom: "Convolution138"
+  top: "Convolution138"
 }
 layer {
-  name: "Convolution137"
+  name: "Convolution139"
   type: "Convolution"
-  bottom: "Convolution136"
-  top: "Convolution137"
+  bottom: "Convolution138"
+  top: "Convolution139"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -7136,7 +7166,7 @@ layer {
   name: "Eltwise50"
   type: "Eltwise"
   bottom: "Eltwise49"
-  bottom: "Convolution137"
+  bottom: "Convolution139"
   top: "Eltwise50"
   eltwise_param {
     operation: SUM
@@ -7187,10 +7217,10 @@ layer {
   top: "BatchNorm126"
 }
 layer {
-  name: "Convolution138"
+  name: "Convolution140"
   type: "Convolution"
   bottom: "BatchNorm126"
-  top: "Convolution138"
+  top: "Convolution140"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -7205,8 +7235,8 @@ layer {
 layer {
   name: "BatchNorm127"
   type: "BatchNorm"
-  bottom: "Convolution138"
-  top: "Convolution138"
+  bottom: "Convolution140"
+  top: "Convolution140"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -7223,8 +7253,8 @@ layer {
 layer {
   name: "Scale127"
   type: "Scale"
-  bottom: "Convolution138"
-  top: "Convolution138"
+  bottom: "Convolution140"
+  top: "Convolution140"
   scale_param {
     bias_term: true
   }
@@ -7232,14 +7262,14 @@ layer {
 layer {
   name: "ReLU86"
   type: "ReLU"
-  bottom: "Convolution138"
-  top: "Convolution138"
+  bottom: "Convolution140"
+  top: "Convolution140"
 }
 layer {
-  name: "Convolution139"
+  name: "Convolution141"
   type: "Convolution"
-  bottom: "Convolution138"
-  top: "Convolution139"
+  bottom: "Convolution140"
+  top: "Convolution141"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -7254,8 +7284,8 @@ layer {
 layer {
   name: "BatchNorm128"
   type: "BatchNorm"
-  bottom: "Convolution139"
-  top: "Convolution139"
+  bottom: "Convolution141"
+  top: "Convolution141"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -7272,8 +7302,8 @@ layer {
 layer {
   name: "Scale128"
   type: "Scale"
-  bottom: "Convolution139"
-  top: "Convolution139"
+  bottom: "Convolution141"
+  top: "Convolution141"
   scale_param {
     bias_term: true
   }
@@ -7281,14 +7311,14 @@ layer {
 layer {
   name: "ReLU87"
   type: "ReLU"
-  bottom: "Convolution139"
-  top: "Convolution139"
+  bottom: "Convolution141"
+  top: "Convolution141"
 }
 layer {
-  name: "Convolution140"
+  name: "Convolution142"
   type: "Convolution"
-  bottom: "Convolution139"
-  top: "Convolution140"
+  bottom: "Convolution141"
+  top: "Convolution142"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -7304,7 +7334,7 @@ layer {
   name: "Eltwise51"
   type: "Eltwise"
   bottom: "Pooling13"
-  bottom: "Convolution140"
+  bottom: "Convolution142"
   top: "Eltwise51"
   eltwise_param {
     operation: SUM
@@ -7344,10 +7374,10 @@ layer {
   top: "BatchNorm129"
 }
 layer {
-  name: "Convolution141"
+  name: "Convolution143"
   type: "Convolution"
   bottom: "BatchNorm129"
-  top: "Convolution141"
+  top: "Convolution143"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -7362,8 +7392,8 @@ layer {
 layer {
   name: "BatchNorm130"
   type: "BatchNorm"
-  bottom: "Convolution141"
-  top: "Convolution141"
+  bottom: "Convolution143"
+  top: "Convolution143"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -7380,8 +7410,8 @@ layer {
 layer {
   name: "Scale130"
   type: "Scale"
-  bottom: "Convolution141"
-  top: "Convolution141"
+  bottom: "Convolution143"
+  top: "Convolution143"
   scale_param {
     bias_term: true
   }
@@ -7389,14 +7419,14 @@ layer {
 layer {
   name: "ReLU88"
   type: "ReLU"
-  bottom: "Convolution141"
-  top: "Convolution141"
+  bottom: "Convolution143"
+  top: "Convolution143"
 }
 layer {
-  name: "Convolution142"
+  name: "Convolution144"
   type: "Convolution"
-  bottom: "Convolution141"
-  top: "Convolution142"
+  bottom: "Convolution143"
+  top: "Convolution144"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -7411,8 +7441,8 @@ layer {
 layer {
   name: "BatchNorm131"
   type: "BatchNorm"
-  bottom: "Convolution142"
-  top: "Convolution142"
+  bottom: "Convolution144"
+  top: "Convolution144"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -7429,8 +7459,8 @@ layer {
 layer {
   name: "Scale131"
   type: "Scale"
-  bottom: "Convolution142"
-  top: "Convolution142"
+  bottom: "Convolution144"
+  top: "Convolution144"
   scale_param {
     bias_term: true
   }
@@ -7438,14 +7468,14 @@ layer {
 layer {
   name: "ReLU89"
   type: "ReLU"
-  bottom: "Convolution142"
-  top: "Convolution142"
+  bottom: "Convolution144"
+  top: "Convolution144"
 }
 layer {
-  name: "Convolution143"
+  name: "Convolution145"
   type: "Convolution"
-  bottom: "Convolution142"
-  top: "Convolution143"
+  bottom: "Convolution144"
+  top: "Convolution145"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -7461,7 +7491,7 @@ layer {
   name: "Eltwise52"
   type: "Eltwise"
   bottom: "Eltwise51"
-  bottom: "Convolution143"
+  bottom: "Convolution145"
   top: "Eltwise52"
   eltwise_param {
     operation: SUM
@@ -7501,10 +7531,10 @@ layer {
   top: "BatchNorm132"
 }
 layer {
-  name: "Convolution144"
+  name: "Convolution146"
   type: "Convolution"
   bottom: "BatchNorm132"
-  top: "Convolution144"
+  top: "Convolution146"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -7519,8 +7549,8 @@ layer {
 layer {
   name: "BatchNorm133"
   type: "BatchNorm"
-  bottom: "Convolution144"
-  top: "Convolution144"
+  bottom: "Convolution146"
+  top: "Convolution146"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -7537,8 +7567,8 @@ layer {
 layer {
   name: "Scale133"
   type: "Scale"
-  bottom: "Convolution144"
-  top: "Convolution144"
+  bottom: "Convolution146"
+  top: "Convolution146"
   scale_param {
     bias_term: true
   }
@@ -7546,14 +7576,14 @@ layer {
 layer {
   name: "ReLU90"
   type: "ReLU"
-  bottom: "Convolution144"
-  top: "Convolution144"
+  bottom: "Convolution146"
+  top: "Convolution146"
 }
 layer {
-  name: "Convolution145"
+  name: "Convolution147"
   type: "Convolution"
-  bottom: "Convolution144"
-  top: "Convolution145"
+  bottom: "Convolution146"
+  top: "Convolution147"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -7568,8 +7598,8 @@ layer {
 layer {
   name: "BatchNorm134"
   type: "BatchNorm"
-  bottom: "Convolution145"
-  top: "Convolution145"
+  bottom: "Convolution147"
+  top: "Convolution147"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -7586,8 +7616,8 @@ layer {
 layer {
   name: "Scale134"
   type: "Scale"
-  bottom: "Convolution145"
-  top: "Convolution145"
+  bottom: "Convolution147"
+  top: "Convolution147"
   scale_param {
     bias_term: true
   }
@@ -7595,14 +7625,14 @@ layer {
 layer {
   name: "ReLU91"
   type: "ReLU"
-  bottom: "Convolution145"
-  top: "Convolution145"
+  bottom: "Convolution147"
+  top: "Convolution147"
 }
 layer {
-  name: "Convolution146"
+  name: "Convolution148"
   type: "Convolution"
-  bottom: "Convolution145"
-  top: "Convolution146"
+  bottom: "Convolution147"
+  top: "Convolution148"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -7618,7 +7648,7 @@ layer {
   name: "Eltwise53"
   type: "Eltwise"
   bottom: "Eltwise52"
-  bottom: "Convolution146"
+  bottom: "Convolution148"
   top: "Eltwise53"
   eltwise_param {
     operation: SUM
@@ -7689,10 +7719,10 @@ layer {
   top: "BatchNorm135"
 }
 layer {
-  name: "Convolution147"
+  name: "Convolution149"
   type: "Convolution"
   bottom: "BatchNorm135"
-  top: "Convolution147"
+  top: "Convolution149"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -7707,8 +7737,8 @@ layer {
 layer {
   name: "BatchNorm136"
   type: "BatchNorm"
-  bottom: "Convolution147"
-  top: "Convolution147"
+  bottom: "Convolution149"
+  top: "Convolution149"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -7725,8 +7755,8 @@ layer {
 layer {
   name: "Scale136"
   type: "Scale"
-  bottom: "Convolution147"
-  top: "Convolution147"
+  bottom: "Convolution149"
+  top: "Convolution149"
   scale_param {
     bias_term: true
   }
@@ -7734,14 +7764,14 @@ layer {
 layer {
   name: "ReLU92"
   type: "ReLU"
-  bottom: "Convolution147"
-  top: "Convolution147"
+  bottom: "Convolution149"
+  top: "Convolution149"
 }
 layer {
-  name: "Convolution148"
+  name: "Convolution150"
   type: "Convolution"
-  bottom: "Convolution147"
-  top: "Convolution148"
+  bottom: "Convolution149"
+  top: "Convolution150"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -7756,8 +7786,8 @@ layer {
 layer {
   name: "BatchNorm137"
   type: "BatchNorm"
-  bottom: "Convolution148"
-  top: "Convolution148"
+  bottom: "Convolution150"
+  top: "Convolution150"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -7774,8 +7804,8 @@ layer {
 layer {
   name: "Scale137"
   type: "Scale"
-  bottom: "Convolution148"
-  top: "Convolution148"
+  bottom: "Convolution150"
+  top: "Convolution150"
   scale_param {
     bias_term: true
   }
@@ -7783,14 +7813,14 @@ layer {
 layer {
   name: "ReLU93"
   type: "ReLU"
-  bottom: "Convolution148"
-  top: "Convolution148"
+  bottom: "Convolution150"
+  top: "Convolution150"
 }
 layer {
-  name: "Convolution149"
+  name: "Convolution151"
   type: "Convolution"
-  bottom: "Convolution148"
-  top: "Convolution149"
+  bottom: "Convolution150"
+  top: "Convolution151"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -7806,7 +7836,7 @@ layer {
   name: "Eltwise55"
   type: "Eltwise"
   bottom: "Eltwise54"
-  bottom: "Convolution149"
+  bottom: "Convolution151"
   top: "Eltwise55"
   eltwise_param {
     operation: SUM
@@ -7877,10 +7907,10 @@ layer {
   top: "BatchNorm138"
 }
 layer {
-  name: "Convolution150"
+  name: "Convolution152"
   type: "Convolution"
   bottom: "BatchNorm138"
-  top: "Convolution150"
+  top: "Convolution152"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -7895,8 +7925,8 @@ layer {
 layer {
   name: "BatchNorm139"
   type: "BatchNorm"
-  bottom: "Convolution150"
-  top: "Convolution150"
+  bottom: "Convolution152"
+  top: "Convolution152"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -7913,8 +7943,8 @@ layer {
 layer {
   name: "Scale139"
   type: "Scale"
-  bottom: "Convolution150"
-  top: "Convolution150"
+  bottom: "Convolution152"
+  top: "Convolution152"
   scale_param {
     bias_term: true
   }
@@ -7922,14 +7952,14 @@ layer {
 layer {
   name: "ReLU94"
   type: "ReLU"
-  bottom: "Convolution150"
-  top: "Convolution150"
+  bottom: "Convolution152"
+  top: "Convolution152"
 }
 layer {
-  name: "Convolution151"
+  name: "Convolution153"
   type: "Convolution"
-  bottom: "Convolution150"
-  top: "Convolution151"
+  bottom: "Convolution152"
+  top: "Convolution153"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -7944,8 +7974,8 @@ layer {
 layer {
   name: "BatchNorm140"
   type: "BatchNorm"
-  bottom: "Convolution151"
-  top: "Convolution151"
+  bottom: "Convolution153"
+  top: "Convolution153"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -7962,8 +7992,8 @@ layer {
 layer {
   name: "Scale140"
   type: "Scale"
-  bottom: "Convolution151"
-  top: "Convolution151"
+  bottom: "Convolution153"
+  top: "Convolution153"
   scale_param {
     bias_term: true
   }
@@ -7971,14 +8001,14 @@ layer {
 layer {
   name: "ReLU95"
   type: "ReLU"
-  bottom: "Convolution151"
-  top: "Convolution151"
+  bottom: "Convolution153"
+  top: "Convolution153"
 }
 layer {
-  name: "Convolution152"
+  name: "Convolution154"
   type: "Convolution"
-  bottom: "Convolution151"
-  top: "Convolution152"
+  bottom: "Convolution153"
+  top: "Convolution154"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -7994,7 +8024,7 @@ layer {
   name: "Eltwise57"
   type: "Eltwise"
   bottom: "Eltwise56"
-  bottom: "Convolution152"
+  bottom: "Convolution154"
   top: "Eltwise57"
   eltwise_param {
     operation: SUM
@@ -8065,10 +8095,10 @@ layer {
   top: "BatchNorm141"
 }
 layer {
-  name: "Convolution153"
+  name: "Convolution155"
   type: "Convolution"
   bottom: "BatchNorm141"
-  top: "Convolution153"
+  top: "Convolution155"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -8083,8 +8113,8 @@ layer {
 layer {
   name: "BatchNorm142"
   type: "BatchNorm"
-  bottom: "Convolution153"
-  top: "Convolution153"
+  bottom: "Convolution155"
+  top: "Convolution155"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -8101,8 +8131,8 @@ layer {
 layer {
   name: "Scale142"
   type: "Scale"
-  bottom: "Convolution153"
-  top: "Convolution153"
+  bottom: "Convolution155"
+  top: "Convolution155"
   scale_param {
     bias_term: true
   }
@@ -8110,14 +8140,14 @@ layer {
 layer {
   name: "ReLU96"
   type: "ReLU"
-  bottom: "Convolution153"
-  top: "Convolution153"
+  bottom: "Convolution155"
+  top: "Convolution155"
 }
 layer {
-  name: "Convolution154"
+  name: "Convolution156"
   type: "Convolution"
-  bottom: "Convolution153"
-  top: "Convolution154"
+  bottom: "Convolution155"
+  top: "Convolution156"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -8132,8 +8162,8 @@ layer {
 layer {
   name: "BatchNorm143"
   type: "BatchNorm"
-  bottom: "Convolution154"
-  top: "Convolution154"
+  bottom: "Convolution156"
+  top: "Convolution156"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -8150,8 +8180,8 @@ layer {
 layer {
   name: "Scale143"
   type: "Scale"
-  bottom: "Convolution154"
-  top: "Convolution154"
+  bottom: "Convolution156"
+  top: "Convolution156"
   scale_param {
     bias_term: true
   }
@@ -8159,14 +8189,14 @@ layer {
 layer {
   name: "ReLU97"
   type: "ReLU"
-  bottom: "Convolution154"
-  top: "Convolution154"
+  bottom: "Convolution156"
+  top: "Convolution156"
 }
 layer {
-  name: "Convolution155"
+  name: "Convolution157"
   type: "Convolution"
-  bottom: "Convolution154"
-  top: "Convolution155"
+  bottom: "Convolution156"
+  top: "Convolution157"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -8182,7 +8212,7 @@ layer {
   name: "Eltwise59"
   type: "Eltwise"
   bottom: "Eltwise58"
-  bottom: "Convolution155"
+  bottom: "Convolution157"
   top: "Eltwise59"
   eltwise_param {
     operation: SUM
@@ -8253,10 +8283,10 @@ layer {
   top: "BatchNorm144"
 }
 layer {
-  name: "Convolution156"
+  name: "Convolution158"
   type: "Convolution"
   bottom: "BatchNorm144"
-  top: "Convolution156"
+  top: "Convolution158"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -8271,8 +8301,8 @@ layer {
 layer {
   name: "BatchNorm145"
   type: "BatchNorm"
-  bottom: "Convolution156"
-  top: "Convolution156"
+  bottom: "Convolution158"
+  top: "Convolution158"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -8289,8 +8319,8 @@ layer {
 layer {
   name: "Scale145"
   type: "Scale"
-  bottom: "Convolution156"
-  top: "Convolution156"
+  bottom: "Convolution158"
+  top: "Convolution158"
   scale_param {
     bias_term: true
   }
@@ -8298,14 +8328,14 @@ layer {
 layer {
   name: "ReLU98"
   type: "ReLU"
-  bottom: "Convolution156"
-  top: "Convolution156"
+  bottom: "Convolution158"
+  top: "Convolution158"
 }
 layer {
-  name: "Convolution157"
+  name: "Convolution159"
   type: "Convolution"
-  bottom: "Convolution156"
-  top: "Convolution157"
+  bottom: "Convolution158"
+  top: "Convolution159"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -8320,8 +8350,8 @@ layer {
 layer {
   name: "BatchNorm146"
   type: "BatchNorm"
-  bottom: "Convolution157"
-  top: "Convolution157"
+  bottom: "Convolution159"
+  top: "Convolution159"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -8338,8 +8368,8 @@ layer {
 layer {
   name: "Scale146"
   type: "Scale"
-  bottom: "Convolution157"
-  top: "Convolution157"
+  bottom: "Convolution159"
+  top: "Convolution159"
   scale_param {
     bias_term: true
   }
@@ -8347,14 +8377,14 @@ layer {
 layer {
   name: "ReLU99"
   type: "ReLU"
-  bottom: "Convolution157"
-  top: "Convolution157"
+  bottom: "Convolution159"
+  top: "Convolution159"
 }
 layer {
-  name: "Convolution158"
+  name: "Convolution160"
   type: "Convolution"
-  bottom: "Convolution157"
-  top: "Convolution158"
+  bottom: "Convolution159"
+  top: "Convolution160"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -8370,22 +8400,21 @@ layer {
   name: "Eltwise61"
   type: "Eltwise"
   bottom: "Eltwise60"
-  bottom: "Convolution158"
+  bottom: "Convolution160"
   top: "Eltwise61"
   eltwise_param {
     operation: SUM
   }
 }
 layer {
-  name: "Convolution159"
+  name: "Convolution161"
   type: "Convolution"
   bottom: "Eltwise61"
-  top: "Convolution159"
+  top: "Convolution161"
   convolution_param {
     num_output: 256
     bias_term: false
     pad: 0
-    kernel_size: 1
     kernel_size: 1
     stride: 1
     weight_filler {
@@ -8396,8 +8425,8 @@ layer {
 layer {
   name: "BatchNorm147"
   type: "BatchNorm"
-  bottom: "Convolution159"
-  top: "Convolution159"
+  bottom: "Convolution161"
+  top: "Convolution161"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -8414,8 +8443,8 @@ layer {
 layer {
   name: "Scale147"
   type: "Scale"
-  bottom: "Convolution159"
-  top: "Convolution159"
+  bottom: "Convolution161"
+  top: "Convolution161"
   scale_param {
     bias_term: true
   }
@@ -8423,14 +8452,14 @@ layer {
 layer {
   name: "ReLU100"
   type: "ReLU"
-  bottom: "Convolution159"
-  top: "Convolution159"
+  bottom: "Convolution161"
+  top: "Convolution161"
 }
 layer {
-  name: "Convolution160"
+  name: "Convolution162"
   type: "Convolution"
-  bottom: "Convolution159"
-  top: "Convolution160"
+  bottom: "Convolution161"
+  top: "Convolution162"
   convolution_param {
     num_output: 38
     bias_term: false
@@ -8476,10 +8505,10 @@ layer {
   top: "BatchNorm148"
 }
 layer {
-  name: "Convolution161"
+  name: "Convolution163"
   type: "Convolution"
   bottom: "BatchNorm148"
-  top: "Convolution161"
+  top: "Convolution163"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -8494,8 +8523,8 @@ layer {
 layer {
   name: "BatchNorm149"
   type: "BatchNorm"
-  bottom: "Convolution161"
-  top: "Convolution161"
+  bottom: "Convolution163"
+  top: "Convolution163"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -8512,8 +8541,8 @@ layer {
 layer {
   name: "Scale149"
   type: "Scale"
-  bottom: "Convolution161"
-  top: "Convolution161"
+  bottom: "Convolution163"
+  top: "Convolution163"
   scale_param {
     bias_term: true
   }
@@ -8521,14 +8550,14 @@ layer {
 layer {
   name: "ReLU101"
   type: "ReLU"
-  bottom: "Convolution161"
-  top: "Convolution161"
+  bottom: "Convolution163"
+  top: "Convolution163"
 }
 layer {
-  name: "Convolution162"
+  name: "Convolution164"
   type: "Convolution"
-  bottom: "Convolution161"
-  top: "Convolution162"
+  bottom: "Convolution163"
+  top: "Convolution164"
   convolution_param {
     num_output: 128
     bias_term: false
@@ -8543,8 +8572,8 @@ layer {
 layer {
   name: "BatchNorm150"
   type: "BatchNorm"
-  bottom: "Convolution162"
-  top: "Convolution162"
+  bottom: "Convolution164"
+  top: "Convolution164"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -8561,8 +8590,8 @@ layer {
 layer {
   name: "Scale150"
   type: "Scale"
-  bottom: "Convolution162"
-  top: "Convolution162"
+  bottom: "Convolution164"
+  top: "Convolution164"
   scale_param {
     bias_term: true
   }
@@ -8570,14 +8599,14 @@ layer {
 layer {
   name: "ReLU102"
   type: "ReLU"
-  bottom: "Convolution162"
-  top: "Convolution162"
+  bottom: "Convolution164"
+  top: "Convolution164"
 }
 layer {
-  name: "Convolution163"
+  name: "Convolution165"
   type: "Convolution"
-  bottom: "Convolution162"
-  top: "Convolution163"
+  bottom: "Convolution164"
+  top: "Convolution165"
   convolution_param {
     num_output: 256
     bias_term: false
@@ -8593,22 +8622,21 @@ layer {
   name: "Eltwise62"
   type: "Eltwise"
   bottom: "Eltwise60"
-  bottom: "Convolution163"
+  bottom: "Convolution165"
   top: "Eltwise62"
   eltwise_param {
     operation: SUM
   }
 }
 layer {
-  name: "Convolution164"
+  name: "Convolution166"
   type: "Convolution"
   bottom: "Eltwise62"
-  top: "Convolution164"
+  top: "Convolution166"
   convolution_param {
     num_output: 256
     bias_term: false
     pad: 0
-    kernel_size: 1
     kernel_size: 1
     stride: 1
     weight_filler {
@@ -8619,8 +8647,8 @@ layer {
 layer {
   name: "BatchNorm151"
   type: "BatchNorm"
-  bottom: "Convolution164"
-  top: "Convolution164"
+  bottom: "Convolution166"
+  top: "Convolution166"
   param {
     lr_mult: 0.0
     decay_mult: 0.0
@@ -8637,8 +8665,8 @@ layer {
 layer {
   name: "Scale151"
   type: "Scale"
-  bottom: "Convolution164"
-  top: "Convolution164"
+  bottom: "Convolution166"
+  top: "Convolution166"
   scale_param {
     bias_term: true
   }
@@ -8646,14 +8674,14 @@ layer {
 layer {
   name: "ReLU103"
   type: "ReLU"
-  bottom: "Convolution164"
-  top: "Convolution164"
+  bottom: "Convolution166"
+  top: "Convolution166"
 }
 layer {
-  name: "Convolution165"
+  name: "Convolution167"
   type: "Convolution"
-  bottom: "Convolution164"
-  top: "Convolution165"
+  bottom: "Convolution166"
+  top: "Convolution167"
   convolution_param {
     num_output: 19
     bias_term: false

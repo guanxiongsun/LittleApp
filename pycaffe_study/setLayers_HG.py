@@ -8,7 +8,7 @@ Created on Tue Aug 29 17:43:33 2017
 from __future__ import print_function
 from caffe import layers as L, params as P, to_proto
 from caffe.proto import caffe_pb2
-import caffe
+#import caffe
 
 def conv_bn_sc_rl(bottom, ks, nout, stride=1, pad=0):
     conv = L.Convolution(bottom, kernel_size=ks, stride=stride,
@@ -22,7 +22,7 @@ def conv_bn_sc_rl(bottom, ks, nout, stride=1, pad=0):
     return relu
 
 def bn_scale(bottom):
-    batch_norm = L.BatchNorm(conv, in_place=True, param=[dict(lr_mult=0, 
+    batch_norm = L.BatchNorm(bottom, in_place=True, param=[dict(lr_mult=0, 
                                 decay_mult=0), dict(lr_mult=0, decay_mult=0), 
                                 dict(lr_mult=0, decay_mult=0)])
     scale = L.Scale(batch_norm, bias_term=True, in_place=True)
@@ -34,18 +34,24 @@ def conv_f(bottom,ks,nout,stride=1,pad=0):
                          weight_filler=dict(type='msra'))
     return conv
 
-def deconv_f(bottom,ks,nout,stride=1,pad=0):
-    deconv = L.Deconvolution(bottom, convolution_param=dict(num_output=nout, kernel_size=ks, stride=stride, pad=[0],
+def deconv_f(bottom,ks,nout,stride=2,pad=0):
+    deconv = L.Deconvolution(bottom, convolution_param=dict(num_output=nout, 
+                            kernel_size=ks, stride=stride, pad=[0],group=nout,
                              weight_filler=dict(type='constant', value=1), bias_term=False),
                              param=dict(lr_mult=0, decay_mult=0))
-
+    return deconv
 
 def residual(bottom, numIn, numOut):
-    bn = bn_scale(bottom);
+    batch_norm = L.BatchNorm(bottom, in_place=False, param=[dict(lr_mult=0, 
+                                decay_mult=0), dict(lr_mult=0, decay_mult=0), 
+                                dict(lr_mult=0, decay_mult=0)])
+    scale = L.Scale(batch_norm, bias_term=True, in_place=True)
+    relu = L.Relu(scale, in_place=True);
     
-    conv1 = conv_bn_sc_rl(bn,1,numOut/2); # 1x1
+    tmp = int(numOut)/2
+    conv1 = conv_bn_sc_rl(relu,1,tmp); # 1x1
     
-    conv3 = conv_bn_sc_rl(conv1,3,numOut/2,1,1); # 3x3
+    conv3 = conv_bn_sc_rl(conv1,3,tmp,1,1); # 3x3
     
     conv1_2 = conv_f(conv3,1,numOut); # 1x1
     
@@ -58,13 +64,13 @@ def residual(bottom, numIn, numOut):
     
     return addition
 
-def hourglass(nRepeats, nFeatures, inputs):
+def hourglass(inputs, nRepeats, nFeatures):
     up1 = residual(inputs,nFeatures,nFeatures);
-    low1 = L.Pooling(bottom, pool = P.Pooling.MAX, 2,2);
+    low1 = L.Pooling(inputs, pool = P.Pooling.MAX, kernel_size=2,stride=2);
     low1 = residual(low1,nFeatures,nFeatures);
     
     if nRepeats > 1:
-        low2 = hourglass(nRepeats-1, nFeatures, low1);
+        low2 = hourglass(low1, nRepeats-1, nFeatures);
     else:
         low2 = residual(low1,nFeatures,nFeatures);
     
@@ -79,36 +85,47 @@ def hourglass(nRepeats, nFeatures, inputs):
     addition = L.Eltwise(up1,up2,operation=P.Eltwise.SUM);
         
     return addition
-
-def lin(numIn, numOut, inputs):
+ 
+def lin(inputs, numOut):
     return conv_bn_sc_rl(inputs, [1,1], numOut);
 
-der createModel(nFeatures, nStacks):
+def createModel(nFeatures, nStacks, nRepeats):
     # now, this code can't recognize include phase, so there will only be a TEST phase data layer
-    data, label = L.Data(source=train_lmdb, backend=P.Data.LMDB, batch_size=batch_size, ntop=2,
+    data, label = L.Data(source='train_lmdb', backend=P.Data.LMDB, batch_size=2, ntop=2,
         transform_param=dict(crop_size=227, mean_value=[104, 117, 123], mirror=True),
         include=dict(phase=getattr(caffe_pb2, 'TRAIN')))
     
     conv1 = conv_bn_sc_rl(data,7,64,2,3);
     r1 = residual(conv1,64,128);
-    pool = L.Pooling(bottom, pool = P.Pooling.MAX, 2,2);
+    pool = L.Pooling(r1, pool = P.Pooling.MAX, kernel_size=2,stride=2);
     r2 = residual(pool,128,128);
-    r3 = residual(128,nFeatures);
+    r3 = residual(r2,128,nFeatures);
     
+    inputs = r3;
     for i in range(nStacks):
-        hg = hourglass()
+        hg = hourglass(inputs, nRepeats, nFeatures);
         
+        l1 = residual(hg,nFeatures,nFeatures);
+        l2 = residual(hg,nFeatures,nFeatures);
+        ll1 = lin(l1, nFeatures);
+        ll2 = lin(l2, nFeatures);
         
-    return
+        tmpOut1 = conv_f(ll1, 1, 38);
+        tmpOut2 = conv_f(ll2, 1, 19);
+        
+        if i < nStacks-1 :
+            back1 = conv_f(ll1,1,nFeatures);
+            back2 = conv_f(tmpOut1,1,nFeatures);
+            back3 = conv_f(tmpOut2,1,nFeatures);
+            
+            addition = L.Eltwise(back1,back2,back3,operation=P.Eltwise.SUM);
+            
+            inputs = addition;
+    return to_proto(tmpOut1,tmpOut2)
     
+def make_net():
+    with open('HG.prototxt', 'w') as f:
+        print(createModel(256,3,4), file = f)
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+if __name__ == '__main__':
+    make_net()    

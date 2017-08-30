@@ -1070,6 +1070,7 @@ layer {
   bottom: "Eltwise5"
   top: "Pooling3"
   pooling_param {
+    pad: 1
     pool: MAX
     kernel_size: 2
     stride: 2

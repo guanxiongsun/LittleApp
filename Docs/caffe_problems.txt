@@ -1,0 +1,68 @@
+问题一
+
+PROTOC src/caffe/proto/caffe.proto
+CXX .build_release/src/caffe/proto/caffe.pb.cc
+CXX src/caffe/data_transformer.cpp
+In file included from ./include/caffe/util/device_alternate.hpp:40:0,
+                 from ./include/caffe/common.hpp:19,
+                 from ./include/caffe/blob.hpp:8,
+                 from ./include/caffe/data_transformer.hpp:6,
+                 from src/caffe/data_transformer.cpp:8:
+./include/caffe/util/cudnn.hpp: In function ‘const char* cudnnGetErrorString(cudnnStatus_t)’:
+./include/caffe/util/cudnn.hpp:21:10: warning: enumeration value ‘CUDNN_STATUS_RUNTIME_PREREQUISITE_MISSING’ not handled in switch [-Wswitch]
+   switch (status) {
+          ^
+./include/caffe/util/cudnn.hpp: In function ‘void caffe::cudnn::setConvolutionDesc(cudnnConvolutionStruct**, cudnnTensorDescriptor_t, cudnnFilterDescriptor_t, int, int, int, int)’:
+./include/caffe/util/cudnn.hpp:113:70: error: too few arguments to function ‘cudnnStatus_t cudnnSetConvolution2dDescriptor(cudnnConvolutionDescriptor_t, int, int, int, int, int, int, cudnnConvolutionMode_t, cudnnDataType_t)’
+       pad_h, pad_w, stride_h, stride_w, 1, 1, CUDNN_CROSS_CORRELATION));
+                                                                      ^
+./include/caffe/util/cudnn.hpp:15:28: note: in definition of macro ‘CUDNN_CHECK’
+     cudnnStatus_t status = condition; \
+                            ^
+In file included from ./include/caffe/util/cudnn.hpp:5:0,
+                 from ./include/caffe/util/device_alternate.hpp:40,
+                 from ./include/caffe/common.hpp:19,
+                 from ./include/caffe/blob.hpp:8,
+                 from ./include/caffe/data_transformer.hpp:6,
+                 from src/caffe/data_transformer.cpp:8:
+/usr/local/cuda/include/cudnn.h:500:27: note: declared here
+ cudnnStatus_t CUDNNWINAPI cudnnSetConvolution2dDescriptor( cudnnConvolutionDescriptor_t convDesc,
+                           ^
+Makefile:575: recipe for target '.build_release/src/caffe/data_transformer.o' failed
+make: *** [.build_release/src/caffe/data_transformer.o] Error 1
+
+
+google 发现是cudnn.h不兼容cudnnv5的问题，
+
+解决方法是用新版本caffe中的cudnn.hpp替换rcf里的cudnn.hpp
+
+cp /export/anshan/caffe/caffe-master/include/caffe/util/cudnn.hpp ./include/caffe/util/
+
+问题二
+
+CXX/LD -o .build_release/tools/extract_features.bin
+//home/sgx/software/anaconda2/lib/libpng16.so.16：对‘inflateValidate@ZLIB_1.2.9’未定义的引用
+collect2: error: ld returned 1 exit status
+Makefile:619: recipe for target '.build_release/tools/upgrade_solver_proto_text.bin' failed
+make: *** [.build_release/tools/upgrade_solver_proto_text.bin] Error 1
+
+解决方法
+LINKFLAGS := -Wl,-rpath,$(HOME)/anaconda3/lib
+
+该方法不行
+解决办法是更新ZLIB，目前是1.2.8版本
+搜索源码安装1.2.11版本
+
+
+问题三
+
+LD -o .build_release/lib/libcaffe.so.1.0.0-rc3
+/usr/bin/ld: 找不到 -lhdf5_hl
+/usr/bin/ld: 找不到 -lhdf5
+
+解决办法
+cd /usr/lib/x86_64-linux-gnu
+
+sudo ln -s libhdf5_serial.so.10.1.0 libhdf5.so
+
+sudo ln -s libhdf5_serial_hl.so.10.0.2 libhdf5_hl.so

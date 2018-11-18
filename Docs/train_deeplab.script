@@ -1,0 +1,59 @@
+python deeplab/train.py \
+    --logtostderr \
+    --training_number_of_steps=90000 \
+    --train_split="train" \
+    --model_variant="xception_65" \
+    --atrous_rates=6 \
+    --atrous_rates=12 \
+    --atrous_rates=18 \
+    --output_stride=16 \
+    --decoder_output_stride=4 \
+    --train_crop_size=769 \
+    --train_crop_size=769 \
+    --train_batch_size=1 \
+    --dataset="cityscapes" \
+    --initialize_last_layer=false \
+    --fine_tune_batch_norm=false \
+    --tf_initial_checkpoint="/home/sgx/data/checkpoints/ImageNet/xception_65/model.ckpt.index" \
+    --train_logdir="deeplab/datasets/cityscapes/exp/train_on_train_set" \
+    --dataset_dir="deeplab/datasets/cityscapes/tfrecord"
+
+
+python deeplab/eval.py \
+    --logtostderr \
+    --eval_split="val" \
+    --eval_scales=[0.5,0.75,1.0,1.25] \
+    --model_variant="xception_65" \
+    --atrous_rates=6 \
+    --atrous_rates=12 \
+    --atrous_rates=18 \
+    --output_stride=16 \
+    --decoder_output_stride=4 \
+    --eval_crop_size=1025 \
+    --eval_crop_size=2049 \
+    --dataset="cityscapes" \
+    --checkpoint_dir="deeplab/datasets/cityscapes/exp/train_on_train_set" \
+    --eval_logdir="deeplab/datasets/cityscapes/exp/eval_on_val" \
+    --dataset_dir="deeplab/datasets/cityscapes/tfrecord"
+
+python deeplab/vis.py \
+    --logtostderr \
+    --eval_split="val" \
+    --model_variant="xception_65" \
+    --atrous_rates=6 \ 
+    --atrous_rates=12 \
+    --atrous_rates=18 \
+    --output_stride=8 \
+    --decoder_output_stride=4 \
+    --eval_crop_size=1025 \
+    --eval_crop_size=2049 \
+    --dataset="cityscapes" \
+    --checkpoint_dir="deeplab/datasets/cityscapes/exp/train_on_train_set" \    
+    --vis_logdir="deeplab/datasets/cityscapes/exp/vis" \
+    --dataset_dir="deeplab/datasets/cityscapes/tfrecord"
+
+
+
+
+
+

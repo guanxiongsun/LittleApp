@@ -1,0 +1,104 @@
+{
+    "configs": [
+        {
+            "method": "aes-256-cfb",
+            "password": "S0ml4lusGG",
+            "remarks": "auto",
+            "server": "382749.auto.baacloud.club",
+            "server_port": 39476
+        },
+        {
+            "method": "aes-256-cfb",
+            "password": "S0ml4lusGG",
+            "remarks": "hk1",
+            "server": "382749.hk-1.baacloud1.com",
+            "server_port": 39476
+        },
+        {
+            "method": "aes-256-cfb",
+            "password": "S0ml4lusGG",
+            "remarks": "hk2",
+            "server": "382749.hk-2.baacloud1.com",
+            "server_port": 39476
+        },
+        {
+            "method": "aes-256-cfb",
+            "password": "S0ml4lusGG",
+            "remarks": "hk3",
+            "server": "382749.hk-1.baacloud1.com",
+            "server_port": 39476
+        },
+        {
+            "method": "aes-256-cfb",
+            "password": "S0ml4lusGG",
+            "remarks": "jp1",
+            "server": "382749.jp-2.baacloud1.com",
+            "server_port": 39476
+        },
+        {
+            "method": "aes-256-cfb",
+            "password": "S0ml4lusGG",
+            "remarks": "sp1",
+            "server": "382749.sg-1.baacloud1.com",
+            "server_port": 39476
+        },
+        {
+            "method": "aes-256-cfb",
+            "password": "S0ml4lusGG",
+            "remarks": "sp2",
+            "server": "382749.sg-2.baacloud1.com",
+            "server_port": 39476
+        },
+        {
+            "method": "aes-256-cfb",
+            "password": "S0ml4lusGG",
+            "remarks": "usa1",
+            "server": "382749.us-1.baacloud1.com",
+            "server_port": 39476
+        },
+        {
+            "method": "aes-256-cfb",
+            "password": "S0ml4lusGG",
+            "remarks": "usa2",
+            "server": "382749.us-3.baacloud1.com",
+            "server_port": 39476
+        },
+        {
+            "method": "aes-256-cfb",
+            "password": "S0ml4lusGG",
+            "remarks": "uk1",
+            "server": "382749.uk-1.baacloud1.com",
+            "server_port": 39476
+        },
+        {
+            "method": "aes-256-cfb",
+            "password": "S0ml4lusGG",
+            "remarks": "rs1",
+            "server": "382749.ru-1.baacloud1.com",
+            "server_port": 39476
+        },
+        {
+            "method": "aes-256-cfb",
+            "password": "S0ml4lusGG",
+            "remarks": "rs2",
+            "server": "382749.ru-3.baacloud1.com",
+            "server_port": 39476
+        },
+        {
+            "method": "aes-256-cfb",
+            "password": "S0ml4lusGG",
+            "remarks": "hk5x",
+            "server": "382749.s-hk-1.baacloud1.com",
+            "server_port": 39476
+        },
+        {
+            "method": "aes-256-cfb",
+            "password": "S0ml4lusGG",
+            "remarks": "jp5x",
+            "server": "382749.s-jp-1.baacloud1.com",
+            "server_port": 39476
+        }
+    ],
+    "localPort": 1080,
+    "shareOverLan": false
+}

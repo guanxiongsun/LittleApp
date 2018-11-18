@@ -1,0 +1,57 @@
+pred_post_stage6_5
+      Head , Shoulder , Elbow , Wrist , Hip , Knee  , Ankle , Mean , 
+name  93.10 , 86.60 , 74.19 , 67.48 , 76.09 , 63.59 , 56.69 , 74.18
+
+pred_post_stage6_9
+      Head , Shoulder , Elbow , Wrist , Hip , Knee  , Ankle , Mean , 
+name  94.13 , 90.68 , 78.60 , 72.01 , 79.55 , 70.47 , 66.46 , 79.0
+     
+pred_post_stage6_60
+      Head , Shoulder , Elbow , Wrist , Hip , Knee  , Ankle , Mean , 
+name  96.28 , 95.48 , 88.82 , 83.83 , 88.48 , 83.48 , 78.95 , 88.01
+
+pred_post_stage6_76
+      Head , Shoulder , Elbow , Wrist , Hip , Knee  , Ankle , Mean , 
+      name  96.42 , 95.63 , 89.20 , 84.53 , 89.12 , 83.60 , 79.33 , 88.37
+
+pred 79
+      Head , Shoulder , Elbow , Wrist , Hip , Knee  , Ankle , Mean , 
+      name  96.38 , 95.49 , 89.42 , 84.86 , 88.75 , 84.53 , 80.56 , 88.68
+
+pred 83
+      Head , Shoulder , Elbow , Wrist , Hip , Knee  , Ankle , Mean , 
+      name  95.90 , 95.41 , 89.35 , 84.05 , 89.03 , 83.56 , 80.35 , 88.39
+
+pred_post_stage6_90
+      Head , Shoulder , Elbow , Wrist , Hip , Knee  , Ankle , Mean , 
+      name  96.45 , 95.32 , 89.76 , 84.67 , 88.86 , 84.71 , 80.94 , 88.78
+
+pred_post_stage6_100
+      Head , Shoulder , Elbow , Wrist , Hip , Knee  , Ankle , Mean , 
+      name  96.62 , 95.66 , 90.16 , 85.42 , 89.48 , 84.93 , 81.36 , 89.20
+
+pred_post_stage6_120
+    Head , Shoulder , Elbow , Wrist , Hip , Knee  , Ankle , Mean , 
+    name  96.86 , 95.78 , 90.36 , 85.90 , 89.38 , 85.58 , 81.39 , 89.41
+
+pred 125
+      Head , Shoulder , Elbow , Wrist , Hip , Knee  , Ankle , Mean , 
+      name  96.72 , 95.94 , 90.50 , 85.82 , 89.38 , 85.43 , 81.60 , 89.45
+
+pred 130
+      Head , Shoulder , Elbow , Wrist , Hip , Knee  , Ankle , Mean , 
+      name  96.82 , 96.02 , 90.51 , 85.78 , 89.36 , 85.49 , 81.60 , 89.47
+
+pred 135
+      Head , Shoulder , Elbow , Wrist , Hip , Knee  , Ankle , Mean , 
+      name  96.69 , 95.78 , 90.43 , 85.68 , 89.29 , 85.33 , 81.79 , 89.39
+
+pred 145
+      Head , Shoulder , Elbow , Wrist , Hip , Knee  , Ankle , Mean , 
+      name  96.76 , 95.87 , 90.41 , 85.73 , 89.17 , 85.17 , 81.34 , 89.31
+
+pred 150
+      Head , Shoulder , Elbow , Wrist , Hip , Knee  , Ankle , Mean , 
+      name  96.76 , 95.92 , 90.41 , 86.14 , 89.14 , 85.31 , 81.62 , 89.43
+
+

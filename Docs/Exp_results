@@ -1,0 +1,16 @@
+1.eval on cityscapes
+  data:ImageNet Initial + Cityscapes train_fine set
+  model:Xception-65
+  (1) output_stride = 16
+      IOU_1.0 = 78.73%
+  (2) output_stride = 8
+      IOU_mean[0.75:0.25:1.25] = 80.05%
+
+
+2.eval on pascal_voc
+  data:ImageNet Initial + pascal_voc train_fine
+  model:Xception-65
+  (1) output_stride = 16
+	IOU_1.0 = 82.0%
+  (2) output_stride = 8
+	IOU_mean[0.75:0.25:1.25] = 83.3%

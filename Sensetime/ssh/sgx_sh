@@ -1,0 +1,14 @@
+ #!/usr/bin/expect -f
+ set user sunguanxiong
+ set host jump01.bj.sensetime.com
+ set password Sgx19940210
+ set timeout -1
+
+ spawn ssh $user@$host
+ expect "*password*"
+ send "$password\r"
+
+ expect "IP*"
+ send "10.5.36.31\r"
+
+ interact
